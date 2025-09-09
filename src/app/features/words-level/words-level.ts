@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
+  selector: 'app-words-level',
   imports: [],
-  templateUrl: './modal.html',
-  styleUrl: './modal.scss',
+  templateUrl: './words-level.html',
+  styleUrl: './words-level.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Modal {
+export class WordsLevel {
 
 }
