@@ -1,6 +1,6 @@
 # 🌍 WordMap — Expand Your English Vocabulary
 
-- [🔗 Live Demo](https://deploy-preview-10--word-map.netlify.app/)
+- 🔗 [Live Demo](https://word-map.netlify.app)
 - 🐞 [Report Issue](https://github.com/nadezhdanik/word-map/issues)  
 
 ## 📖 Overview  
@@ -15,7 +15,7 @@ No ads. No clutter. Just ⚡ speed and focus.
 |-------------|--------------------------------------------------|
 | **Frontend** | Angular v20.2.2, TypeScript, HTML, SCSS, Vite, Karma |
 | **Backend**  | Firebase (auth, storage, sync) |
-| **DevOps**   | ESLint, Prettier, Husky + lint-staged |
+| **DevOps**   | ESLint |
 | **Management** | GitHub Projects, Discord |
 | **Features Implemented** | Signals, Lazy loading, Guards, Reactive Forms |
 | **Accessibility** | Semantic HTML, ARIA labels, keyboard navigation |
@@ -51,10 +51,7 @@ npm run <script-name>
 | `build`      | Build project for production (`dist/`) |
 | `watch`      | Dev build with file watching |
 | `lint`       | Run ESLint checks |
-| `lint:fix`   | Auto-fix lint issues |
-| `format`     | Format code with Prettier |
 | `test`       | Run unit tests |
-| `prepare`    | Setup Husky pre-commit hooks |
  
 ## ⚡ Angular Tips
 
