@@ -1,59 +1,73 @@
-# WordMap
+# 🌍 WordMap — Expand Your English Vocabulary
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+- 🔗 [Live Demo](https://word-map.netlify.app)
+- 🐞 [Report Issue](https://github.com/nadezhdanik/word-map/issues)  
 
-## Development server
+## 📖 Overview  
+**WordMap** is a lightweight, offline-capable app designed to help learners grow their English vocabulary.  
+From **A1 beginners** to **B2 upper-intermediate**, WordMap adapts to your level, interests, and pace.  
+No ads. No clutter. Just ⚡ speed and focus.  
 
-To start a local development server, run:
+
+## 🛠️ Tech Stack  
+
+| Area        | Tools |
+|-------------|--------------------------------------------------|
+| **Frontend** | Angular v20.2.2, TypeScript, HTML, SCSS, Vite, Karma |
+| **Backend**  | Firebase (auth, storage, sync) |
+| **DevOps**   | ESLint |
+| **Management** | GitHub Projects, Discord |
+| **Features Implemented** | Signals, Lazy loading, Guards, Reactive Forms |
+| **Accessibility** | Semantic HTML, ARIA labels, keyboard navigation |
+
+
+
+## 🚀 Getting Started  
 
 ```bash
-ng serve
+# Clone repository
+git clone https://github.com/nadezhdanik/word-map.git
+
+# Navigate to project folder
+cd word-map
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 📜 Scripts
+The following NPM scripts are available for development, formatting, linting, and testing. Use them with:
 
-## Code scaffolding
+```
+npm run <script-name>
+```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Script       | Description |
+|--------------|-------------|
+| `start`      | Run dev server at [localhost:4200](http://localhost:4200) |
+| `build`      | Build project for production (`dist/`) |
+| `watch`      | Dev build with file watching |
+| `lint`       | Run ESLint checks |
+| `test`       | Run unit tests |
+ 
+## ⚡ Angular Tips
 
-```bash
+Generate a new component:
+```
 ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
+List all available schematics:
+```
 ng generate --help
 ```
 
-## Building
+## 👥 Team
+🙈 [Tatsiana Hatskaya](https://github.com/TatsHats)
 
-To build the project run:
+🙉 [Nadezhda Memelova](https://github.com/nadezhdanik)
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+🙊 [Alena Alekseeva](https://github.com/Alena1409)
