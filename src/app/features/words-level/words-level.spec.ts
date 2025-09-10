@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Main } from './main';
+import { WordsLevel } from './words-level';
 
-describe('Main', () => {
-  let component: Main;
-  let fixture: ComponentFixture<Main>;
+describe('WordsLevel', () => {
+  let component: WordsLevel;
+  let fixture: ComponentFixture<WordsLevel>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Main]
+      imports: [WordsLevel]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Main);
+    fixture = TestBed.createComponent(WordsLevel);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
