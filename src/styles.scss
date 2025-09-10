@@ -6,6 +6,19 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
+:root {
+  --bg-dark: #1a1a1a;
+  --text-light: #e2e8f0;
+  --color-bright: #64ffda;
+  --gradient-rainbow: linear-gradient(90deg,
+    #ff6b6b 0%,
+    #4ecdc4 25%,
+    #45b7d1 50%,
+    #f9ca24 75%,
+    #6c5ce7 100%
+  );
+}
+
 html {
   @include mat.theme((
     color: (
