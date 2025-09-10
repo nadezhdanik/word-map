@@ -4,8 +4,6 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  background-color: var(--light-bg);
-  color: var(--light-text);
 
   &::after {
     content: '';
@@ -37,6 +35,9 @@
   &__icon {
     color: var(--accent-blue);
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: 0.3s ease;
 
      &:hover {
@@ -46,6 +47,16 @@
 
     &.active {
       color: var(--accent-purple);
+      transform: scale(1.1);
+    }
+  }
+
+  &__theme {
+    color: var(--accent-yellow);
+    margin-left: 10px;
+    transition: 0.3s ease;
+
+    &:hover {
       transform: scale(1.1);
     }
   }

@@ -63,3 +63,26 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+
+  a {
+    color: var(--light-text);
+  }
+}
+
+body.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+
+  a {
+    color: var(--dark-text);
+  }
+}
+
+* {
+  transition:  0.3s ease;
+}
+

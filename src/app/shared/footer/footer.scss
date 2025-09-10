@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--light-bg);
   font-size: 12px;
   font-weight: 400;
   position: relative;
@@ -28,7 +27,6 @@
 
   &__link {
     text-decoration: none;
-    color: var(--light-text);
     transition: all 0.3s ease;
     position: relative;
 
@@ -68,7 +66,6 @@
   }
 
   &__year {
-    color: var(--light-text);
     letter-spacing: 0.1em;
 
     &::before {

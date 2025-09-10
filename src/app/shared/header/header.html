@@ -31,6 +31,13 @@
       matTooltip="Profile"
     ><mat-icon>person</mat-icon>
     </a>
+
+    @if (themeService._theme()==="light") {
+      <mat-icon class="header__theme" (click)="themeService.toggleTheme()">sunny</mat-icon>
+    } @else {
+      <mat-icon class="header__theme" (click)="themeService.toggleTheme()">nightlight</mat-icon>
+    }
+    
   </div>
 
 </header>
