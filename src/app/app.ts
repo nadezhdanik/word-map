@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Footer } from "./shared/footer/footer";
 import { Header } from "./shared/header/header";
@@ -10,5 +10,4 @@ import { Header } from "./shared/header/header";
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('word-map');
 }

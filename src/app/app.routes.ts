@@ -11,5 +11,11 @@ export const routes: Routes = [
   {path: 'profile',
     loadComponent:()=> import('./features/profile/profile').then(c=> c.Profile)
   },
+  {path: 'registration',
+    loadComponent:()=> import('./features/registration/registration').then(c=> c.Registration)
+  },
+  {path: 'login',
+    loadComponent:()=> import('./features/login/login').then(c=> c.Login)
+  },
   {path: '**', redirectTo: 'home'}
 ];

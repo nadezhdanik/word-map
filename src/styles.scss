@@ -70,6 +70,13 @@ body.light {
 
   a {
     color: var(--light-text);
+    border-color: var(--light-border);
+  }
+
+  .auth{
+    background-color: var(--light-card-bg);
+    border: 1px solid var(--light-border);
+    border-radius: 8px;
   }
 }
 
@@ -80,9 +87,68 @@ body.dark {
   a {
     color: var(--dark-text);
   }
+
+  .auth{
+    background-color: var(--dark-card-bg);
+    border: 1px solid  var(--dark-border);
+    border-radius: 8px;
+  }
 }
 
 * {
   transition:  0.3s ease;
 }
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &.primary {
+    background-color: var(--accent-purple);
+    color: white;
+
+    &:hover {
+      background-color: #5a4ad1;
+    }
+  }
+
+  &.secondary {
+    background-color: transparent;
+    border: 2px solid var(--accent-turquoise);
+    color: var(--accent-turquoise);
+
+    &:hover {
+      background-color: var(--accent-turquoise);
+      color: var(--light-card-bg);
+    }
+  }
+
+  &.warning {
+    background-color: var(--accent-red);
+    color: white;
+
+    &:hover {
+      background-color: #e65c5c;
+    }
+  }
+
+  &.icon {
+    background-color: transparent;
+    padding: 10px;
+    border: none;
+    color: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
 
