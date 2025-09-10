@@ -7,15 +7,28 @@
 @use '@angular/material' as mat;
 
 :root {
-  --bg-dark: #1a1a1a;
-  --text-light: #e2e8f0;
-  --color-bright: #64ffda;
+  --accent-red: #ff6b6b;
+  --accent-turquoise: #4ecdc4;
+  --accent-blue: #45b7d1;
+  --accent-yellow: #f9ca24;
+  --accent-purple: #6c5ce7;
+
+  --light-bg: #f8f8f8;
+  --light-text: #1a1a1a;
+  --light-border: #e0e0e0;
+  --light-card-bg: #ffffff;
+
+  --dark-bg: #1a1a1a;
+  --dark-text: #f0f0f0;
+  --dark-border: #444444;
+  --dark-card-bg: #282828;
+
   --gradient-rainbow: linear-gradient(90deg,
-    #ff6b6b 0%,
-    #4ecdc4 25%,
-    #45b7d1 50%,
-    #f9ca24 75%,
-    #6c5ce7 100%
+    var(--accent-red) 0%,
+    var(--accent-turquoise) 25%,
+    var(--accent-blue) 50%,
+    var(--accent-yellow) 75%,
+    var(--accent-purple) 100%
   );
 }
 

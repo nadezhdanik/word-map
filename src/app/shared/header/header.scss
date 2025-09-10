@@ -4,6 +4,8 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  background-color: var(--light-bg);
+  color: var(--light-text);
 
   &::after {
     content: '';
@@ -32,20 +34,20 @@
     gap: 10px;
   }
 
-    &__icon-link {
-      color: #45b7d1;
-      text-decoration: none;
-      transition: 0.3s ease;
+  &__icon {
+    color: var(--accent-blue);
+    text-decoration: none;
+    transition: 0.3s ease;
 
-      &:hover {
-        color: #6c5ce7;
-        transform: scale(1.1);
-      }
+     &:hover {
+      color: var(--accent-purple);
+      transform: scale(1.1);
+    }
 
-      &.active {
-        color: #6c5ce7;
-        transform: scale(1.1);
-      }
+    &.active {
+      color: var(--accent-purple);
+      transform: scale(1.1);
+    }
   }
 
 }

@@ -3,9 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--bg-dark);
+  background: var(--light-bg);
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 400;
   position: relative;
 
   &::before {
@@ -28,7 +28,7 @@
 
   &__link {
     text-decoration: none;
-    color: var(--text-light);
+    color: var(--light-text);
     transition: all 0.3s ease;
     position: relative;
 
@@ -39,12 +39,12 @@
       left: 0;
       width: 0;
       height: 1px;
-      background: var(--color-bright);
+      background: var(--accent-blue);
       transition: 0.3s ease;
     }
 
     &:hover {
-      color: var(--color-bright);
+      color: var(--accent-blue);
     }
 
     &:hover::after {
@@ -62,18 +62,18 @@
     transition: 0.3s ease;
 
     &:hover {
-      filter: drop-shadow(0 0 3px var(--color-bright));
+      filter: drop-shadow(0 0 3px var(--accent-blue));
       transform: scale(1.1);
     }
   }
 
   &__year {
-    color: var(--text-light);
+    color: var(--light-text);
     letter-spacing: 0.1em;
 
     &::before {
       content: '© ';
-      color: var(--color-bright);
+      color: var(--accent-blue);
     }
   }
 }
