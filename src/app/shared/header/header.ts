@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Theme } from '../../core/services/theme/theme';
+import { Auth } from '../../core/services/auth';
 
 @Component({
   selector: 'app-header',
@@ -14,5 +15,16 @@ import { Theme } from '../../core/services/theme/theme';
 })
 export class Header {
   public themeService = inject(Theme);
+  public authService = inject(Auth);
 
+  private router = inject(Router);
+
+  public async logout(): Promise<void> {
+    try {
+      await this.authService.logout();
+      await this.router.navigate(['/home']);
+    } catch {
+      return
+    }
+  }
 }

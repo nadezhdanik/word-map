@@ -23,32 +23,42 @@
     ><mat-icon>info</mat-icon>
     </a>
 
-    <a
-      class="header__icon"
-      routerLink="profile"
-      routerLinkActive="active"
-      aria-label="Go to Profile page"
-      matTooltip="Profile"
-    ><mat-icon>person</mat-icon>
-    </a>
+    @if(authService.isUserLoggedIn()){
+      <a
+        class="header__icon"
+        routerLink="profile"
+        routerLinkActive="active"
+        aria-label="Go to Profile page"
+        matTooltip="Profile"
+      ><mat-icon>person</mat-icon>
+      </a>
 
-    <a
-      class="header__icon"
-      routerLink="registration"
-      routerLinkActive="active"
-      aria-label="Go to Registration page"
-      matTooltip="Registration"
-    ><mat-icon>person_add</mat-icon>
-    </a>
+      <mat-icon
+        class="header__icon"
+        aria-label="Logout "
+        matTooltip="Logout"
+        (click)="logout()"
+      >logout</mat-icon>
+    } @else {
 
-    <a
-      class="header__icon"
-      routerLink="login"
-      routerLinkActive="active"
-      aria-label="Go to Login page"
-      matTooltip="Login"
-    ><mat-icon>login</mat-icon>
-    </a>
+      <a
+        class="header__icon"
+        routerLink="registration"
+        routerLinkActive="active"
+        aria-label="Go to Registration page"
+        matTooltip="Registration"
+      ><mat-icon>person_add</mat-icon>
+      </a>
+
+      <a
+        class="header__icon"
+        routerLink="login"
+        routerLinkActive="active"
+        aria-label="Go to Login page"
+        matTooltip="Login"
+      ><mat-icon>login</mat-icon>
+      </a>
+    }
 
     @if (themeService.theme()==="light") {
       <mat-icon class="header__theme" (click)="themeService.toggleTheme()">sunny</mat-icon>
