@@ -11,8 +11,8 @@ describe('Header', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
-      providers: [provideRouter([]),
-
+      providers: [
+        provideRouter([]),
         {
           provide: FirebaseAuth,
           useValue: {

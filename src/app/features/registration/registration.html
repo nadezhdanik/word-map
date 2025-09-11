@@ -2,7 +2,7 @@
   <h2 class="registration__title">registration</h2>
   <a
     class="registration__link"
-    routerLink="login"
+    routerLink="/login"
     routerLinkActive="active"
     aria-label="Go to Login page"
     >Already registered? Log in!</a>
@@ -11,7 +11,7 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" placeholder="example@domain.com" />
+        <input matInput formControlName="email">
 
         @if (registrationForm.controls.email.hasError('required')) {
           <mat-error>Email is required.</mat-error>
@@ -28,7 +28,7 @@
           matInput
           [type]="isPasswordHidden ? 'password' : 'text'"
           formControlName="password"
-        />
+        >
         <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()">
           <mat-icon>{{ isPasswordHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
         </button>

@@ -93,6 +93,34 @@ body.dark {
     border: 1px solid  var(--dark-border);
     border-radius: 8px;
   }
+
+  mat-form-field {
+    .mat-mdc-input-element {
+      color: var(--dark-text) !important;
+    }
+
+    .mat-mdc-floating-label {
+      color: var(--dark-text) !important;
+    }
+
+    button{
+      color: var(--dark-text);
+    }
+  }
+
+  .btn:disabled {
+    cursor: default;
+    background-color: var(--dark-border);
+    border-color: transparent;
+    color: var(--dark-card-bg);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--dark-border);
+        color: var(--dark-card-bg);
+      }
+    }
+  }
 }
 
 * {
