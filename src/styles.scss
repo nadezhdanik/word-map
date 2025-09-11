@@ -111,8 +111,10 @@ body.dark {
     background-color: var(--accent-purple);
     color: white;
 
-    &:hover {
-      background-color: #5a4ad1;
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--accent-purple);
+      }
     }
   }
 
@@ -121,9 +123,11 @@ body.dark {
     border: 2px solid var(--accent-turquoise);
     color: var(--accent-turquoise);
 
-    &:hover {
-      background-color: var(--accent-turquoise);
-      color: var(--light-card-bg);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--accent-turquoise);
+        color: var(--light-card-bg);
+      }
     }
   }
 
@@ -132,7 +136,7 @@ body.dark {
     color: white;
 
     &:hover {
-      background-color: #e65c5c;
+      background-color: var(--accent-red);
     }
   }
 
@@ -145,8 +149,24 @@ body.dark {
     align-items: center;
     justify-content: center;
 
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+    @media (hover: hover) {
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: var(--light-border);
+    border-color: transparent;
+    color: var(--dark-text);
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--light-border);
+        color: var(--dark-text);
+      }
     }
   }
 }
