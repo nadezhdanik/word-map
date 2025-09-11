@@ -41,12 +41,14 @@
       transition: 0.3s ease;
     }
 
-    &:hover {
-      color: var(--accent-blue);
-    }
+    @media (hover: hover) {
+      &:hover {
+        color: var(--accent-blue);
+      }
 
-    &:hover::after {
-      width: 100%;
+      &:hover::after {
+        width: 100%;
+      }
     }
   }
 
@@ -59,9 +61,11 @@
     background-position: center;
     transition: 0.3s ease;
 
-    &:hover {
-      filter: drop-shadow(0 0 3px var(--accent-blue));
-      transform: scale(1.1);
+    @media (hover: hover) {
+      &:hover {
+        filter: drop-shadow(0 0 3px var(--accent-blue));
+        transform: scale(1.1);
+      }
     }
   }
 

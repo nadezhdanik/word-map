@@ -3,7 +3,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { RouterLink, RouterModule } from '@angular/router';
-import { Theme } from '../../core/services/theme';
+import { Theme } from '../../core/services/theme/theme';
 
 @Component({
   selector: 'app-header',
