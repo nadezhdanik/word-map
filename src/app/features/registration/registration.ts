@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { RegistrationForm } from './models/registration-form.model';
@@ -8,6 +8,10 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { Auth } from '../../core/services/auth';
+import { EMAIL_PATTERN } from '../../core/patterns/email-pattern';
+import { PASSWORD_PATTERN } from '../../core/patterns/password-pattern';
+import { FirebaseError } from '@angular/fire/app';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-registration',
@@ -30,11 +34,11 @@ export class Registration implements OnInit {
   public errorMessage: string | null = null;
   public isLoading = false;
 
-
   private router = inject(Router);
   private fb = inject(FormBuilder);
   private authService = inject(Auth);
-
+  private cd = inject(ChangeDetectorRef);
+  private snackBar = inject(MatSnackBar);
 
   public ngOnInit(): void {
     this.createRegistrationForm()
@@ -51,10 +55,18 @@ export class Registration implements OnInit {
     try {
       await this.authService.register(email, password);
       await this.router.navigate(['/home']);
-    } catch {
-      this.errorMessage = 'Error Registration';
+      this.snackBar.open(`✅ Registration successful.`, 'Close', {duration: 3000});
+    } catch(error: unknown) {
+      if (error instanceof FirebaseError) {
+        this.errorMessage = error.message || 'Error Registration';
+        this.snackBar.open(`❌ Error Registration: ${error.message}`, 'Close', {duration: 3000});
+      } else {
+        this.errorMessage = 'Error Registration'
+        this.snackBar.open(`❌ Error Registration.`, 'Close', {duration: 3000});
+      }
     } finally {
       this.isLoading = false;
+      this.cd.markForCheck();
     }
   }
 
@@ -66,11 +78,11 @@ export class Registration implements OnInit {
     this.registrationForm = this.fb.nonNullable.group<RegistrationForm>({
       email: this.fb.nonNullable.control('', [
         Validators.required,
-        Validators.email,
+        Validators.pattern(EMAIL_PATTERN),
       ]),
       password: this.fb.nonNullable.control('', [
         Validators.required,
-        Validators.minLength(6),
+        Validators.pattern(PASSWORD_PATTERN),
       ])
     })
   }

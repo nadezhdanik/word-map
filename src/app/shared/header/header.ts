@@ -5,6 +5,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Theme } from '../../core/services/theme/theme';
 import { Auth } from '../../core/services/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-header',
@@ -18,13 +19,14 @@ export class Header {
   public authService = inject(Auth);
 
   private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
 
   public async logout(): Promise<void> {
     try {
       await this.authService.logout();
       await this.router.navigate(['/home']);
     } catch {
-      return
+      this.snackBar.open(`❌ Logout error.`, 'Close', {duration: 3000});
     }
   }
 }

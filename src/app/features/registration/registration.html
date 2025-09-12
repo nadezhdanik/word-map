@@ -17,7 +17,7 @@
           <mat-error>Email is required.</mat-error>
         }
 
-        @if (registrationForm.controls.email.hasError('email')) {
+        @if (registrationForm.controls.email.hasError('pattern')) {
           <mat-error>Valid e-mail: example&#64;domain.com</mat-error>
         }
       </mat-form-field>
@@ -37,8 +37,8 @@
           <mat-error>Password is required.</mat-error>
         }
 
-        @if (registrationForm.controls.password.hasError('minLength')) {
-          <mat-error>Must be 6+ characters.</mat-error>
+        @if (registrationForm.controls.password.hasError('pattern')) {
+          <mat-error>Must be 8+ characters, include upper/lowercase and number</mat-error>
         }
       </mat-form-field>
 
@@ -50,7 +50,7 @@
         @if(isLoading){
           <mat-spinner diameter="20"></mat-spinner>
         } @else {
-          Registration
+          Register
         }
       </button>
 

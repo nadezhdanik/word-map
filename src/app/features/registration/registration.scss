@@ -9,12 +9,15 @@
 
   h2{
     text-transform: uppercase;
+    margin: 0;
+    padding: 1rem;
   }
 
   &__link {
     text-decoration: none;
     transition: all 0.3s ease;
     position: relative;
+    margin-bottom: 1rem;
 
     &::after {
       content: '';
@@ -44,14 +47,14 @@
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1rem;
 
     @media (max-width: 400px) {
       padding: 20px 10px;
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 400px) {
     padding: 20px 0;
   }
 }
