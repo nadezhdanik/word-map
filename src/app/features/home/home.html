@@ -1,1 +1,24 @@
 <p>home works!</p>
+
+<div class="tabs">
+    @if (levels) { 
+        @for (level of levels; track level) { 
+            <button 
+                class="tab"
+                (click)="loadCategories(level)" 
+                [class.active]="level === selectedLevel()" 
+            > 
+                {{ level }} 
+            </button> 
+        } 
+    } 
+</div> 
+
+<div class="categories"> 
+    @for (category of categories(); track category.name) { 
+        <a [routerLink]="['/category', category.name]"> 
+            <p>{{ category.name }}</p> 
+            <p>{{ category.count }}</p> 
+        </a> 
+    } 
+</div>
