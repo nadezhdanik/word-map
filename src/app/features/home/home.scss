@@ -1,0 +1,49 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+.tabs {
+    button {
+        border: none;
+        border-radius: none;
+        background-color: transparent;
+        padding: 10px 15px;
+        font-size: 1rem;
+        font-weight: bold;
+
+        &:hover {
+            background-color: var(--accent-blue);
+        }
+
+        &.active {
+            background-color: var(--accent-blue);
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.7rem;
+        }
+    }
+}
+
+.categories {
+    a {
+        display: flex;
+        justify-content: space-between;
+        width: 250px;
+        text-decoration: none;
+
+        &:hover {
+            background-color: var(--accent-blue);
+        }
+
+        p {
+            margin: 2px;
+        }
+    }
+}

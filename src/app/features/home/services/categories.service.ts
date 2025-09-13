@@ -3,6 +3,7 @@ import { Firestore, collection, collectionData, query, where } from '@angular/fi
 import { map } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Category } from '../interfaces/categories.interface';
+import { Word } from '../interfaces/word.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class CategoryService {
         const words = collection(this.firestore, 'words');
         const queryByLevel = query(words, where('level', '==', level));
         const categories$ = collectionData(queryByLevel, { idField: 'id' }).pipe(
-          map((words: any[] = []): Category[] => {
+          map((docs: unknown[] = []): Category[] => {
+            const words = docs as Word[];
             const counts: Record<string, number> = {};
     
             for (const word of words) {
