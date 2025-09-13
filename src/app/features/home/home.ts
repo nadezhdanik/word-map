@@ -1,5 +1,6 @@
+//import { CategoryService } from './services/categories.service';
 import { ChangeDetectionStrategy, Component, Signal, inject, signal } from '@angular/core';
-import { CategoryService } from './services/categories.service';
+import { CategoryServiceMock } from './services/categories.service.mock';
 import { Category } from './interfaces/categories.interface';
 import { RouterModule } from '@angular/router';
 
@@ -11,7 +12,8 @@ import { RouterModule } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home {
-  private categoryService = inject(CategoryService);
+  //private categoryService = inject(CategoryService);
+  private categoryService = inject(CategoryServiceMock);
 
   public levels: string[] = ['A1', 'A2', 'B1', 'B2'];
   public selectedLevel = signal<string>('A1');
