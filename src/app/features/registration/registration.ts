@@ -1,13 +1,19 @@
-import { ChangeDetectorRef, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { RegistrationForm } from './models/registration-form.model';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import { MatIconModule } from "@angular/material/icon";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { Auth } from '../../core/services/auth';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Auth } from '../../core/services/auth/auth';
 import { EMAIL_PATTERN } from '../../core/patterns/email-pattern';
 import { PASSWORD_PATTERN } from '../../core/patterns/password-pattern';
 import { FirebaseError } from '@angular/fire/app';
@@ -22,14 +28,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatIconModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './registration.html',
   styleUrl: './registration.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Registration implements OnInit {
-  public registrationForm!: FormGroup<RegistrationForm>
+  public registrationForm!: FormGroup<RegistrationForm>;
   public isPasswordHidden = true;
   public errorMessage: string | null = null;
   public isLoading = false;
@@ -41,10 +47,10 @@ export class Registration implements OnInit {
   private snackBar = inject(MatSnackBar);
 
   public ngOnInit(): void {
-    this.createRegistrationForm()
+    this.createRegistrationForm();
   }
 
-  public async onSubmit(): Promise<void>{
+  public async onSubmit(): Promise<void> {
     if (this.registrationForm.invalid) return;
 
     this.isLoading = true;
@@ -55,14 +61,14 @@ export class Registration implements OnInit {
     try {
       await this.authService.register(email, password);
       await this.router.navigate(['/home']);
-      this.snackBar.open(`✅ Registration successful.`, 'Close', {duration: 3000});
-    } catch(error: unknown) {
+      this.snackBar.open(`✅ Registration successful.`, 'Close', { duration: 3000 });
+    } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         this.errorMessage = error.message || 'Error Registration';
-        this.snackBar.open(`❌ Error Registration: ${error.message}`, 'Close', {duration: 3000});
+        this.snackBar.open(`❌ Error Registration: ${error.message}`, 'Close', { duration: 3000 });
       } else {
-        this.errorMessage = 'Error Registration'
-        this.snackBar.open(`❌ Error Registration.`, 'Close', {duration: 3000});
+        this.errorMessage = 'Error Registration';
+        this.snackBar.open(`❌ Error Registration.`, 'Close', { duration: 3000 });
       }
     } finally {
       this.isLoading = false;
@@ -71,7 +77,7 @@ export class Registration implements OnInit {
   }
 
   public togglePasswordVisibility(): void {
-    this.isPasswordHidden = !this.isPasswordHidden
+    this.isPasswordHidden = !this.isPasswordHidden;
   }
 
   private createRegistrationForm(): void {
@@ -83,7 +89,7 @@ export class Registration implements OnInit {
       password: this.fb.nonNullable.control('', [
         Validators.required,
         Validators.pattern(PASSWORD_PATTERN),
-      ])
-    })
+      ]),
+    });
   }
 }

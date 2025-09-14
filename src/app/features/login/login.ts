@@ -7,6 +7,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { Auth } from '../../core/services/auth/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,13 +22,24 @@ export class Login implements OnInit {
   public isPasswordHidden = true;
 
   private fb = inject(FormBuilder);
+  private authService = inject(Auth);
+  private router = inject(Router);
 
   public ngOnInit(): void {
     this.createLoginForm();
   }
 
-  public onSubmit(): void {
-    return;
+  public async onSubmit(): Promise<void> {
+    if (this.loginForm.invalid) return;
+
+    const { email, password } = this.loginForm.getRawValue();
+
+    try {
+      await this.authService.login(email, password);
+      await this.router.navigate(['/home']);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public togglePasswordVisibility(): void {

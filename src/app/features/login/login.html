@@ -18,7 +18,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput formControlName="password" [type]="isPasswordHidden ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
                 <mat-icon>{{ isPasswordHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
             </button>
 
@@ -31,6 +31,6 @@
             }
         </mat-form-field>
 
-        <button class="btn primary" type="submit">Log In</button>
+        <button class="btn primary" type="submit" [disabled]="loginForm.invalid">Log In</button>
     </form>
 </div>
