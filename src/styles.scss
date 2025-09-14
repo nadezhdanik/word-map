@@ -1,4 +1,3 @@
-
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
@@ -23,7 +22,8 @@
   --dark-border: #444444;
   --dark-card-bg: #282828;
 
-  --gradient-rainbow: linear-gradient(90deg,
+  --gradient-rainbow: linear-gradient(
+    90deg,
     var(--accent-red) 0%,
     var(--accent-turquoise) 25%,
     var(--accent-blue) 50%,
@@ -33,14 +33,16 @@
 }
 
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
 }
 
 body {
@@ -61,8 +63,14 @@ body {
 }
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 body.light {
   background-color: var(--light-bg);
@@ -73,7 +81,7 @@ body.light {
     border-color: var(--light-border);
   }
 
-  .auth{
+  .auth {
     background-color: var(--light-card-bg);
     border: 1px solid var(--light-border);
     border-radius: 8px;
@@ -88,9 +96,9 @@ body.dark {
     color: var(--dark-text);
   }
 
-  .auth{
+  .auth {
     background-color: var(--dark-card-bg);
-    border: 1px solid  var(--dark-border);
+    border: 1px solid var(--dark-border);
     border-radius: 8px;
   }
 
@@ -103,7 +111,7 @@ body.dark {
       color: var(--dark-text) !important;
     }
 
-    button{
+    button {
       color: var(--dark-text);
     }
   }
@@ -121,10 +129,19 @@ body.dark {
       }
     }
   }
+
+  .divider {
+    color: var(--dark-text);
+
+    &::before,
+    &::after {
+      border-bottom: 1px solid var(--dark-text);
+    }
+  }
 }
 
 * {
-  transition:  0.3s ease;
+  transition: 0.3s ease;
 }
 
 .btn {
@@ -201,5 +218,3 @@ body.dark {
     }
   }
 }
-
-

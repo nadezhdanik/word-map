@@ -14,12 +14,19 @@ import { MatInput } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Auth } from '../../core/services/auth/auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FirebaseError } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInput, MatButtonModule, MatIcon],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInput,
+    MatButtonModule,
+    MatIcon,
+    RouterLink,
+  ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -56,6 +63,17 @@ export class Login implements OnInit {
 
   public togglePasswordVisibility(): void {
     this.isPasswordHidden = !this.isPasswordHidden;
+  }
+
+  public async signInWithGoogle(): Promise<void> {
+    try {
+      await this.authService.googleSignIn();
+      await this.router.navigate(['/home']);
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        this.errorMessage = error.message;
+      }
+    }
   }
 
   private createLoginForm(): void {

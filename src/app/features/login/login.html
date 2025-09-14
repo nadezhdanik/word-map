@@ -1,6 +1,6 @@
 <div class="auth login">
     <h2>login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
         <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
@@ -36,5 +36,15 @@
         </mat-error>
 
         <button class="btn primary" type="submit" [disabled]="loginForm.invalid">Log In</button>
+
+        <a class="login__link" routerLink="/registration" routerLinkActive="active"
+            aria-label="Go to Registration page">Don't have an
+            account? Register</a>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <button class="btn secondary" (click)="signInWithGoogle()">Continue with Google</button>
     </form>
 </div>
