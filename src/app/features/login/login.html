@@ -1,1 +1,17 @@
-<p>login works!</p>
+<div class="auth login">
+    <h2>login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password">
+        </mat-form-field>
+
+        <button class="btn primary" type="submit">Log In</button>
+    </form>
+</div>
