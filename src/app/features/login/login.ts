@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginForm } from './models/login-form.model';
 import { EMAIL_PATTERN } from '../../core/patterns/email-pattern';
@@ -9,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Auth } from '../../core/services/auth/auth';
 import { Router } from '@angular/router';
+import { FirebaseError } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +27,12 @@ import { Router } from '@angular/router';
 export class Login implements OnInit {
   public loginForm!: FormGroup<LoginForm>;
   public isPasswordHidden = true;
+  public errorMessage = '';
 
   private fb = inject(FormBuilder);
   private authService = inject(Auth);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
 
   public ngOnInit(): void {
     this.createLoginForm();
@@ -38,7 +47,10 @@ export class Login implements OnInit {
       await this.authService.login(email, password);
       await this.router.navigate(['/home']);
     } catch (error) {
-      console.log(error);
+      if (error instanceof FirebaseError) {
+        this.errorMessage = error.message;
+        this.cdr.markForCheck();
+      }
     }
   }
 
