@@ -17,9 +17,9 @@
 
 <div class="categories"> 
     @for (category of categories(); track category.name) { 
-        <a [routerLink]="['/category', category.name]"> 
+        <a (click)="goToCategory(selectedLevel(), category.name)">
             <p>{{ category.name }}</p> 
             <p>0 / {{ category.count }}</p> 
-        </a> 
-    } 
+          </a>
+    }
 </div>

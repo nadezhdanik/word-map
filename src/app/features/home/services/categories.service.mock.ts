@@ -8,6 +8,8 @@ import { Word } from '../interfaces/word.interface';
   })
   export class CategoryServiceMock {
     private categories = signal<Category[]>([]);
+    public selectedWords = signal<Word[]>([]);
+
 
   constructor() {
     this.setLevel('A1');
@@ -30,5 +32,15 @@ import { Word } from '../interfaces/word.interface';
 
     const result: Category[] = Array.from(counts, ([name, count]) => ({ name, count }));
     this.categories.set(result);
+  }
+
+  public getWords(level: string, category: string): Word[] {
+    const words = wordsData as Word[];
+    return words.filter(word => word.level === level && word.category === category);
+  }
+  
+  public selectCategory(level: string, category: string) {
+    const words = this.getWords(level, category);
+    this.selectedWords.set(words);
   }
 }

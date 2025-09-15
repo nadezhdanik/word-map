@@ -14,6 +14,7 @@ export class CategoryService {
     getCategories(level: string): Signal<Category[]> {
         const words = collection(this.firestore, 'words');
         const queryByLevel = query(words, where('level', '==', level));
+        
         const categories$ = collectionData(queryByLevel, { idField: 'id' }).pipe(
           map((docs: unknown[] = []): Category[] => {
             const words = docs as Word[];
@@ -32,4 +33,6 @@ export class CategoryService {
     
         return toSignal(categories$, { initialValue: [] as Category[] }) as Signal<Category[]>;
     }
+
+    // дописать сервис для передачи слов выбранной категории (см. сервис мок getWords и selectCategory)
 }
