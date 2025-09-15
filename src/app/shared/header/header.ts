@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { Theme } from '../../core/services/theme/theme';
-import { Auth } from '../../core/services/auth';
+import { Auth } from '../../core/services/auth/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   imports: [MatButtonModule, MatIconModule, MatTooltipModule, RouterLink, RouterModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
   public themeService = inject(Theme);
@@ -26,7 +26,7 @@ export class Header {
       await this.authService.logout();
       await this.router.navigate(['/home']);
     } catch {
-      this.snackBar.open(`❌ Logout error.`, 'Close', {duration: 3000});
+      this.snackBar.open(`❌ Logout error.`, 'Close', { duration: 3000 });
     }
   }
 }

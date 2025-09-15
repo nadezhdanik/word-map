@@ -1,1 +1,50 @@
-<p>login works!</p>
+<div class="auth login">
+    <h2>login</h2>
+    <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+
+            @if (loginForm.controls.email.hasError('required')) {
+            <mat-error>Email is required.</mat-error>
+            }
+
+            @if (loginForm.controls.email.hasError('pattern')) {
+            <mat-error>Valid e-mail: example&#64;domain.com</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="isPasswordHidden ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+                <mat-icon>{{ isPasswordHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+
+            @if (loginForm.controls.password.hasError('required')) {
+            <mat-error>Password is required.</mat-error>
+            }
+
+            @if (loginForm.controls.password.hasError('pattern')) {
+            <mat-error>Must be 8+ characters, include upper/lowercase and number</mat-error>
+            }
+        </mat-form-field>
+
+        <mat-error [class.visible]="errorMessage" class="error-message">
+            {{ errorMessage }}
+        </mat-error>
+
+        <button class="btn primary" type="submit" [disabled]="loginForm.invalid">Log In</button>
+
+        <a class="login__link" routerLink="/registration" routerLinkActive="active"
+            aria-label="Go to Registration page">Don't have an
+            account? Register</a>
+
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <button class="btn secondary" (click)="signInWithGoogle()">Continue with Google</button>
+    </form>
+</div>
