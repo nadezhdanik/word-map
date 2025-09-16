@@ -7,17 +7,26 @@ import { Word } from '../interfaces/word.interface';
     providedIn: 'root'
   })
   export class CategoryServiceMock {
-    private categories = signal<Category[]>([]);
     public selectedWords = signal<Word[]>([]);
-
+    private categories = signal<Category[]>([]);
 
   constructor() {
     this.setLevel('A1');
   }
 
-  getCategories(level: string): Signal<Category[]> {
+  public getCategories(level: string): Signal<Category[]> {
     this.setLevel(level);
     return this.categories.asReadonly();
+  }
+
+  public getWords(level: string, category: string): Word[] {
+    const words = wordsData as Word[];
+    return words.filter(word => word.level === level && word.category === category);
+  }
+  
+  public selectCategory(level: string, category: string): void {
+    const words = this.getWords(level, category);
+    this.selectedWords.set(words);
   }
 
   private setLevel(level: string): void {
@@ -32,15 +41,5 @@ import { Word } from '../interfaces/word.interface';
 
     const result: Category[] = Array.from(counts, ([name, count]) => ({ name, count }));
     this.categories.set(result);
-  }
-
-  public getWords(level: string, category: string): Word[] {
-    const words = wordsData as Word[];
-    return words.filter(word => word.level === level && word.category === category);
-  }
-  
-  public selectCategory(level: string, category: string) {
-    const words = this.getWords(level, category);
-    this.selectedWords.set(words);
   }
 }

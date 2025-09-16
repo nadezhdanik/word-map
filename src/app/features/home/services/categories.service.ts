@@ -11,7 +11,7 @@ import { Word } from '../interfaces/word.interface';
 export class CategoryService {
     private firestore: Firestore = inject(Firestore);
 
-    getCategories(level: string): Signal<Category[]> {
+    public getCategories(level: string): Signal<Category[]> {
         const words = collection(this.firestore, 'words');
         const queryByLevel = query(words, where('level', '==', level));
         

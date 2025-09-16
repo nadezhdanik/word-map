@@ -13,20 +13,20 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home {
-  //private categoryService = inject(CategoryService);
-  private categoryService = inject(CategoryServiceMock);
-  private router = inject(Router);
-
+  public categoryService = inject(CategoryServiceMock);
   public levels: string[] = ['A1', 'A2', 'B1', 'B2'];
   public selectedLevel = signal<string>('A1');
   public categories: Signal<Category[]> = this.categoryService.getCategories(this.selectedLevel());
-  
+
+  //private categoryService = inject(CategoryService);
+  private router = inject(Router);
+
   public loadCategories (level: string): void {
     this.selectedLevel.set(level);
     this.categories = this.categoryService.getCategories(level);
   }
 
-  goToCategory(level: string, category: string) {
+  public goToCategory(level: string, category: string): void {
     this.categoryService.selectCategory(level, category);
     this.router.navigate(['/category', level, category]);
   }

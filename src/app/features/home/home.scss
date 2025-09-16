@@ -31,11 +31,13 @@
 }
 
 .categories {
-    a {
+    button {
         display: flex;
         justify-content: space-between;
         width: 250px;
         text-decoration: none;
+        background-color: transparent;
+        border: none;
 
         &:hover {
             background-color: var(--accent-blue);
