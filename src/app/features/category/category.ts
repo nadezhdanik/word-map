@@ -18,11 +18,15 @@ export class Category {
 
   private route = inject(ActivatedRoute);
   private categoryService = inject(CategoryServiceMock);
-  private paramMapSignal = toSignal(this.route.queryParamMap, {
+  private paramMapSignal = toSignal(this.route.paramMap, {
     initialValue: null,
   });
 
   constructor() {
+    effect(() => {
+
+      console.log('effect triggered', this.paramMapSignal());
+
       const params = this.paramMapSignal();
       const level = params?.get('level');
       const category = params?.get('category');
@@ -32,5 +36,6 @@ export class Category {
         this.category.set(category);
         this.words.set(this.categoryService.getWords(level, category));
       }
+    });
   }
 }
