@@ -18,7 +18,7 @@ export const TEAM = [
       contribution: ['Login Page', 'Repository setup', 'Deploy', 'Environment Config', 'Game 2'],
     },
     {
-      name: 'Alekseeva Alena',
+      name: 'Alena Alekseeva',
       role: 'Frontend-developer',
       avatar: '1.png',
       about: 'Degreed economics educator. Years in business.Yet my fingers kept tracing lines of code — programming was the love that wouldn’t let go.',
