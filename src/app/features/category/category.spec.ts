@@ -16,7 +16,7 @@ describe('Category', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            queryParamMap: of(convertToParamMap({ level: 'A1', category: 'Food' }))
+            paramMap: of(convertToParamMap({ level: 'A1', category: 'Food' }))
           }
         }
       ]
