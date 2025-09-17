@@ -86,6 +86,10 @@ body.light {
     border: 1px solid var(--light-border);
     border-radius: 8px;
   }
+
+  .bg-card {
+    background-color: var(--light-card-bg);
+  }
 }
 
 body.dark {
@@ -100,6 +104,10 @@ body.dark {
     background-color: var(--dark-card-bg);
     border: 1px solid var(--dark-border);
     border-radius: 8px;
+  }
+
+  .bg-card {
+    background-color: var(--dark-card-bg);
   }
 
   mat-form-field {

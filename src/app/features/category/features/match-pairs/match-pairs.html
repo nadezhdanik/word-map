@@ -1,1 +1,23 @@
-<p>match-pairs works!</p>
+<div class="game">
+<div class="game__header">
+    <h2 class="game__title">MATCH-PAIRS</h2>
+    <div class="game__mode-control">
+      <span class="game__mode-label">MODE:</span>
+      <mat-button-toggle-group [(ngModel)]="easyMode" name="modeToggle">
+        <mat-button-toggle [value]="true">EASY</mat-button-toggle>
+        <mat-button-toggle [value]="false">HARD</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="game__cards">
+    @for (card of cards; track card) {
+      <div class="card bg-card">
+        <div class="card-content">
+          <span class="card-text" [class.hidden]="!card.opened && !easyMode">
+          {{ card.content }}
+          </span>
+        </div>
+      </div>
+    }
+  </div>
+</div>
