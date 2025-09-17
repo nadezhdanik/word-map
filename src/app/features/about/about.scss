@@ -1,0 +1,116 @@
+.about {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    align-items: center;
+
+    h1 {
+        background: var(--gradient-rainbow);
+        -webkit-background-clip: text;
+        background-clip: text; 
+        color: transparent;
+        line-height: 1.1;
+        margin: 1rem 0 0 0;
+    }
+
+    h3 {
+        margin: 1.5rem 0 0.6rem 0;
+    }
+
+    h4 {
+        margin: 0.5rem 0 0 0;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    &__team {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .about__card {
+        width: 250px;
+        height: 350px;
+        perspective: 1000px;
+        box-sizing: border-box;
+        background-color: transparent;
+        margin-bottom: 1.5rem;
+
+        .about__card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+        }
+
+        &.about__card--flipped .about__card-inner {
+          transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+          position: absolute;
+          box-sizing: border-box;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+          background: white;
+          transition: transform 0.3s, box-shadow 0.3s;
+        }
+      
+        .card-back {
+          transform: rotateY(180deg);
+
+            ul {
+                margin-bottom: 10px;
+            }
+
+          a {
+            text-decoration: none;
+            color: var(--accent-purple);
+            margin-left: 3rem;
+          }
+        }
+      
+        &:hover .about__card-inner {
+          transform: rotateY(180deg);
+        }
+        
+        .img-frame {
+            background: var(--gradient-rainbow);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            width: 190px;
+            height: 190px;
+            margin: 1.5rem 0;
+        }
+
+        img {
+            border-radius: 50%;
+            width: 180px;
+            height: 180px;
+        }
+
+        mat-card-title {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        mat-card-subtitle {
+            text-align: center;
+        }
+    }
+
+    
+}
