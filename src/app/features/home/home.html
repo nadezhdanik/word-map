@@ -1,1 +1,31 @@
-<p>home works!</p>
+<div class="tabs">
+    @if (levels) { 
+        @for (level of levels; track level) { 
+            <button 
+                class="tab"
+                (click)="loadCategories(level)"
+                (keydown.enter)="loadCategories(level)" 
+                tabindex="0"
+                [class.active]="level === selectedLevel()" 
+            > 
+                {{ level }}
+                <p class="progress">12%</p>
+            </button> 
+        } 
+    } 
+</div> 
+
+<hr>
+
+<div class="categories"> 
+    @for (category of categories(); track category.name) { 
+        <button 
+            class="category-btn"
+            (click)="goToCategory(selectedLevel(), category.name)"
+            (keydown.enter)="goToCategory(selectedLevel(), category.name)"
+        >
+            <p>{{ category.name }}</p>
+            <p>0 / {{ category.count }}</p>
+        </button>
+    }
+</div>

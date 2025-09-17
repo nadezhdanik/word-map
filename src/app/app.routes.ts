@@ -17,5 +17,8 @@ export const routes: Routes = [
   {path: 'login',
     loadComponent:()=> import('./features/login/login').then(c=> c.Login)
   },
+  {path: 'category/:level/:category',
+    loadComponent:()=> import('./features/category/category').then(c=> c.Category)
+  },
   {path: '**', redirectTo: 'home'}
 ];

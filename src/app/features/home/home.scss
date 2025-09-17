@@ -1,0 +1,50 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+.tabs {
+    button {
+        border: none;
+        border-radius: none;
+        background-color: transparent;
+        padding: 10px 15px;
+        font-size: 1rem;
+        font-weight: bold;
+
+        &:hover {
+            background-color: var(--accent-blue);
+        }
+
+        &.active {
+            background-color: var(--accent-blue);
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.7rem;
+        }
+    }
+}
+
+.categories {
+    button {
+        display: flex;
+        justify-content: space-between;
+        width: 250px;
+        text-decoration: none;
+        background-color: transparent;
+        border: none;
+
+        &:hover {
+            background-color: var(--accent-blue);
+        }
+
+        p {
+            margin: 2px;
+        }
+    }
+}
