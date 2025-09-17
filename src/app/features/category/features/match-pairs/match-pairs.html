@@ -7,17 +7,24 @@
         <mat-button-toggle [value]="true">EASY</mat-button-toggle>
         <mat-button-toggle [value]="false">HARD</mat-button-toggle>
       </mat-button-toggle-group>
+      <button class="btn icon" (click)="restartGame()"><mat-icon>sports_esports</mat-icon>NEW GAME</button>
+      <button class="btn icon" (click)="shuffleCards()"><mat-icon>sync</mat-icon></button>
     </div>
   </div>
   <div class="game__cards">
     @for (card of cards; track card) {
-      <div class="card bg-card">
+      <button
+      class="card bg-card"
+      (click)="onCardClick(card)"
+      [class.selected]="card.opened"
+      [class.win]="gameWon"
+      >
         <div class="card-content">
           <span class="card-text" [class.hidden]="!card.opened && !easyMode">
           {{ card.content }}
           </span>
         </div>
-      </div>
+      </button>
     }
   </div>
 </div>
