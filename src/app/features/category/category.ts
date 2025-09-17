@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CategoryServiceMock } from '../home/services/categories.service.mock';
 import { Word } from '../home/interfaces/word.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-category',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './category.html',
   styleUrl: './category.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
