@@ -50,7 +50,13 @@ module.exports = tseslint.config(
       prettier,
     },
     rules: {
-      'prettier/prettier': 'error',
+      'prettier/prettier': [
+        'error',
+        {
+          endOfLine: 'auto',
+          insertFinalNewline: false,
+        },
+      ],
     },
   },
 );
