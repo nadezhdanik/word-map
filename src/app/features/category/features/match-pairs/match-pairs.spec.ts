@@ -15,13 +15,22 @@ describe('MatchPairs', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            paramMap: of(new Map([['level', 'A1'], ['category', 'Food']])),
-            snapshot: { paramMap: new Map([['level', 'A1'], ['category', 'Food']]) }
-          }
-        }
-      ]
-    })
-    .compileComponents();
+            paramMap: of(
+              new Map([
+                ['level', 'A1'],
+                ['category', 'Food'],
+              ]),
+            ),
+            snapshot: {
+              paramMap: new Map([
+                ['level', 'A1'],
+                ['category', 'Food'],
+              ]),
+            },
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MatchPairs);
     component = fixture.componentInstance;

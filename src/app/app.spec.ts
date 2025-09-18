@@ -7,14 +7,15 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideRouter([]),
-      {
-        provide: FirebaseAuth,
-        useValue: {
-        onAuthStateChanged: jasmine.createSpy()
-        }
-      }
-    ]
+      providers: [
+        provideRouter([]),
+        {
+          provide: FirebaseAuth,
+          useValue: {
+            onAuthStateChanged: jasmine.createSpy(),
+          },
+        },
+      ],
     }).compileComponents();
   });
 

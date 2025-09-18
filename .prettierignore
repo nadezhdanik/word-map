@@ -1,0 +1,25 @@
+# build output
+dist
+out-tsc
+.tmp
+
+# dependencies
+node_modules
+
+# environment files
+*.env
+*.local
+
+# lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# generated Angular files
+coverage
+.angular
+
+# misc
+.DS_Store
+.idea
+.vscode

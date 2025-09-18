@@ -7,7 +7,7 @@ import { TEAM } from './data/team.data';
   imports: [MatCardModule],
   templateUrl: './about.html',
   styleUrl: './about.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class About {
   public developers = TEAM;

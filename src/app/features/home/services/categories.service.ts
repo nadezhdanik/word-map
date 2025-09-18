@@ -6,33 +6,34 @@ import { Category } from '../interfaces/categories.interface';
 import { Word } from '../interfaces/word.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-    private firestore: Firestore = inject(Firestore);
+  private firestore: Firestore = inject(Firestore);
 
-    public getCategories(level: string): Signal<Category[]> {
-        const words = collection(this.firestore, 'words');
-        const queryByLevel = query(words, where('level', '==', level));
-        
-        const categories$ = collectionData(queryByLevel, { idField: 'id' }).pipe(
-          map((docs: unknown[] = []): Category[] => {
-            const words = docs as Word[];
-            const counts: Record<string, number> = {};
-    
-            for (const word of words) {
-              const cat = word.category as string;
-              counts[cat] = (counts[cat] || 0) + 1;
-            }
-    
-            return Object.keys(counts).map(name => ({ 
-                name, count: counts[name] 
-            }));
-          })
-        );
-    
-        return toSignal(categories$, { initialValue: [] as Category[] }) as Signal<Category[]>;
-    }
+  public getCategories(level: string): Signal<Category[]> {
+    const words = collection(this.firestore, 'words');
+    const queryByLevel = query(words, where('level', '==', level));
 
-    // дописать сервис для передачи слов выбранной категории (см. сервис мок getWords и selectCategory)
+    const categories$ = collectionData(queryByLevel, { idField: 'id' }).pipe(
+      map((docs: unknown[] = []): Category[] => {
+        const words = docs as Word[];
+        const counts: Record<string, number> = {};
+
+        for (const word of words) {
+          const cat = word.category as string;
+          counts[cat] = (counts[cat] || 0) + 1;
+        }
+
+        return Object.keys(counts).map((name) => ({
+          name,
+          count: counts[name],
+        }));
+      }),
+    );
+
+    return toSignal(categories$, { initialValue: [] as Category[] }) as Signal<Category[]>;
+  }
+
+  // дописать сервис для передачи слов выбранной категории (см. сервис мок getWords и selectCategory)
 }

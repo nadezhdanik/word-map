@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Card } from './models/card.interface';
 import { TYPE } from './models/card-type.enum';
 import { FormsModule } from '@angular/forms';
@@ -8,13 +14,12 @@ import { CategoryServiceMock } from '../../../home/services/categories.service.m
 import { ActivatedRoute } from '@angular/router';
 import { Word } from '../../../home/interfaces/word.interface';
 
-
 @Component({
   selector: 'app-match-pairs',
   imports: [FormsModule, MatButtonToggleModule, MatIcon],
   templateUrl: './match-pairs.html',
   styleUrl: './match-pairs.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MatchPairs implements OnInit {
   public cards: Card[] = [];
@@ -22,14 +27,14 @@ export class MatchPairs implements OnInit {
   public gameWon = false;
   public words: Word[] = [];
 
-  private firstCard: Card|null = null;
-  private secondCard: Card|null= null;
+  private firstCard: Card | null = null;
+  private secondCard: Card | null = null;
   private isLocked = false;
   private cdr = inject(ChangeDetectorRef);
   private route = inject(ActivatedRoute);
   private categoryService = inject(CategoryServiceMock);
 
-  public ngOnInit():void {
+  public ngOnInit(): void {
     const level = this.route.snapshot.paramMap.get('level');
     const category = this.route.snapshot.paramMap.get('category');
 
@@ -39,7 +44,7 @@ export class MatchPairs implements OnInit {
     }
   }
 
-  public createCards (): void {
+  public createCards(): void {
     this.words.forEach((element, index) => {
       this.cards.push({
         content: element.word,
@@ -47,7 +52,7 @@ export class MatchPairs implements OnInit {
         type: TYPE.EN,
         opened: this.easyMode,
         matched: false,
-      })
+      });
     });
 
     this.words.forEach((element, index) => {
@@ -57,7 +62,7 @@ export class MatchPairs implements OnInit {
         type: TYPE.RUS,
         opened: this.easyMode,
         matched: false,
-      })
+      });
     });
 
     this.shuffleCards();
@@ -73,7 +78,7 @@ export class MatchPairs implements OnInit {
   }
 
   public changeMode(): void {
-    this.easyMode = !this.easyMode
+    this.easyMode = !this.easyMode;
   }
 
   public onCardClick(card: Card): void {
@@ -96,12 +101,13 @@ export class MatchPairs implements OnInit {
         this.resetCards();
       } else {
         setTimeout(() => {
-          if(this.firstCard && this.secondCard){
+          if (this.firstCard && this.secondCard) {
             this.firstCard.opened = false;
             this.secondCard.opened = false;
             this.resetCards();
             this.cdr.markForCheck();
-          }}, 700);
+          }
+        }, 700);
       }
     }
     this.cdr.markForCheck();
@@ -126,7 +132,7 @@ export class MatchPairs implements OnInit {
   }
 
   private checkIfGameIsWon(): void {
-    if(this.cards.every(a => a.matched === true)){
+    if (this.cards.every((a) => a.matched === true)) {
       this.gameWon = true;
     }
   }

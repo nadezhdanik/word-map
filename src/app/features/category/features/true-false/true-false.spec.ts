@@ -8,9 +8,8 @@ describe('TrueFalse', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrueFalse]
-    })
-    .compileComponents();
+      imports: [TrueFalse],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TrueFalse);
     component = fixture.componentInstance;

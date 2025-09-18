@@ -8,9 +8,8 @@ describe('OddOneOut', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OddOneOut]
-    })
-    .compileComponents();
+      imports: [OddOneOut],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(OddOneOut);
     component = fixture.componentInstance;
