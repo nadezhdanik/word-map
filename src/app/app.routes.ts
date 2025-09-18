@@ -18,6 +18,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/category/category').then((c) => c.Category),
   },
   {
+    path: 'category/:level/:category/:pairs',
+    loadComponent: () =>
+      import('./features/category/features/match-pairs/match-pairs').then((c) => c.MatchPairs),
+  },
+  {
     path: 'category/:level/:category/true-false',
     loadComponent: () =>
       import('./features/category/features/true-false/true-false').then((c) => c.TrueFalse),
