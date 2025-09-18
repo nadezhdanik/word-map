@@ -20,5 +20,8 @@ export const routes: Routes = [
   {path: 'category/:level/:category',
     loadComponent:()=> import('./features/category/category').then(c=> c.Category)
   },
+  {path: 'category/:level/:category/:pairs',
+    loadComponent:()=> import('./features/category/features/match-pairs/match-pairs').then(c=> c.MatchPairs)
+  },
   {path: '**', redirectTo: 'home'}
 ];
