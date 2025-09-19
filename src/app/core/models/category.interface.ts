@@ -3,4 +3,4 @@ export interface CategoryStats {
     category: string;
     totalCount: number;
     learnedCount: number;
-}
+  }

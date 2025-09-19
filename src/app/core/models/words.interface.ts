@@ -12,3 +12,9 @@ export interface WordProgress {
   lastReviewed: Timestamp | FieldValue | null;
   nextReview: Timestamp | FieldValue | null;
 }
+
+export interface WordData {
+  wordId: string;
+  level: string;
+  category: string;
+}
