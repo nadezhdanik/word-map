@@ -1,4 +1,4 @@
-export enum TYPE{
-  RUS = "russian",
-  EN = "english"
+export enum TYPE {
+  RUS = 'russian',
+  EN = 'english',
 }

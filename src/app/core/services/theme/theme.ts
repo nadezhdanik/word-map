@@ -2,7 +2,7 @@ import { effect, Injectable, signal } from '@angular/core';
 import { THEME } from '../../models/theme.enum';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class Theme {
   public theme = signal<THEME.light | THEME.dark>(THEME.light);
@@ -21,7 +21,6 @@ export class Theme {
   }
 
   public toggleTheme(): void {
-    this.theme.update(currentTheme => (currentTheme === THEME.light ? THEME.dark : THEME.light));
+    this.theme.update((currentTheme) => (currentTheme === THEME.light ? THEME.dark : THEME.light));
   }
-
 }

@@ -1,1 +1,22 @@
-<p>true-false works!</p>
+<div class="true-false">
+  <h2>TRUE OR FALSE?</h2>
+  <div class="true-false__cards">
+    <mat-card class="true-false__card bg-card">
+      <mat-card-title>{{ firstCard.word }}</mat-card-title></mat-card
+    >
+    <mat-icon>arrow_forward</mat-icon>
+    <mat-card class="true-false__card bg-card">
+      <mat-card-title>{{ displayedTranslation() }}</mat-card-title>
+    </mat-card>
+  </div>
+  <div class="true-false__buttons">
+    <button class="btn secondary" (click)="makeChoice(true)">True</button>
+    <button class="btn secondary" (click)="makeChoice(false)">False</button>
+  </div>
+  <p class="true-false__result">
+    @if (choiceMade()) {
+      {{ result() }}
+      <mat-icon (click)="resetGame()">refresh</mat-icon>
+    }
+  </p>
+</div>

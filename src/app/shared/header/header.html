@@ -1,12 +1,6 @@
 <header class="header">
-
   <div class="header__logo">
-    <a
-      routerLink="home"
-      aria-label="Go to Home page"
-      matTooltip="Home"
-    ><span>WM</span>
-    </a>
+    <a routerLink="home" aria-label="Go to Home page" matTooltip="Home"><span>WM</span> </a>
   </div>
 
   <div class="header__icons">
@@ -16,34 +10,30 @@
       routerLinkActive="active"
       aria-label="Go to About page"
       matTooltip="About"
-    ><mat-icon>info</mat-icon>
+      ><mat-icon>info</mat-icon>
     </a>
 
-    @if(authService.isUserLoggedIn()){
+    @if (authService.isUserLoggedIn()) {
       <a
         class="header__icon"
         routerLink="profile"
         routerLinkActive="active"
         aria-label="Go to Profile page"
         matTooltip="Profile"
-      ><mat-icon>person</mat-icon>
+        ><mat-icon>person</mat-icon>
       </a>
 
-      <mat-icon
-        class="header__icon"
-        aria-label="Logout "
-        matTooltip="Logout"
-        (click)="logout()"
-      >logout</mat-icon>
+      <mat-icon class="header__icon" aria-label="Logout " matTooltip="Logout" (click)="logout()"
+        >logout</mat-icon
+      >
     } @else {
-
       <a
         class="header__icon"
         routerLink="registration"
         routerLinkActive="active"
         aria-label="Go to Registration page"
         matTooltip="Registration"
-      ><mat-icon>person_add</mat-icon>
+        ><mat-icon>person_add</mat-icon>
       </a>
 
       <a
@@ -52,25 +42,26 @@
         routerLinkActive="active"
         aria-label="Go to Login page"
         matTooltip="Login"
-      ><mat-icon>login</mat-icon>
+        ><mat-icon>login</mat-icon>
       </a>
     }
 
-    @if (themeService.theme()==="light") {
+    @if (themeService.theme() === 'light') {
       <mat-icon
         class="header__theme"
         matTooltip="theme"
         aria-label="Change on dark theme"
         (click)="themeService.toggleTheme()"
-      >sunny</mat-icon>
+        >sunny</mat-icon
+      >
     } @else {
       <mat-icon
         class="header__theme"
         aria-label="Change on light theme"
         matTooltip="theme"
         (click)="themeService.toggleTheme()"
-      >nightlight</mat-icon>
+        >nightlight</mat-icon
+      >
     }
   </div>
-
 </header>

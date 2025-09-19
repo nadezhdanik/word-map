@@ -16,12 +16,11 @@ describe('Header', () => {
         {
           provide: FirebaseAuth,
           useValue: {
-            onAuthStateChanged: jasmine.createSpy()
-          }
-        }
-    ]
-    })
-    .compileComponents();
+            onAuthStateChanged: jasmine.createSpy(),
+          },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Header);
     component = fixture.componentInstance;

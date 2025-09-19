@@ -1,55 +1,63 @@
 <div class="about">
-    <h1>WordMap</h1>
+  <h1>WordMap</h1>
 
-    <h3>Your path to fluent English!</h3>
-<span>
-    WordMap is an interactive application for learning English words.
-    It helps to gradually expand your vocabulary — from A1 to B2 level.
-    All words are grouped by levels and topics, and your progress is easy to track.
-</span>
+  <h3>Your path to fluent English!</h3>
+  <span>
+    WordMap is an interactive application for learning English words. It helps to gradually expand
+    your vocabulary — from A1 to B2 level. All words are grouped by levels and topics, and your
+    progress is easy to track.
+  </span>
 
-<h3>Why WordMap?</h3>
-<ul>
+  <h3>Why WordMap?</h3>
+  <ul>
     <li>Level and category map — learn words by themes or interests (Family, Food, Travel…).</li>
     <li>Clear progress tracking — see how many words you've learned in each topic.</li>
     <li>Interactive exercises — cards, quizzes, and mini-games for fun learning.</li>
     <li>Quick selection of learned words to focus on unfamiliar ones.</li>
-</ul>
-    
-    <h3>Our team</h3>
-    <div class="about__team">
-        @for (dev of developers; track dev.name; let ind = $index) {
-            <mat-card class="about__card" (click)="toggleFlip(ind)"
-            [class.about__card--flipped]="flippedCard === ind">
-            <div class="about__card-inner">
-                <div class="card-front">
-                <mat-card-title>{{ dev.name }}</mat-card-title>
-                <div class="img-frame">
-                    <img [src]="dev.avatar" alt="{{dev.name}}">
-                </div>
-                
-                <mat-card-subtitle>{{ dev.role }}</mat-card-subtitle>
-                </div>
-                <div class="card-back">
-                    <mat-card-content>
-                        <p>{{ dev.about }}</p>
-                        <p><b>Stack:</b> {{ dev.stack }}</p>
-                        <h4>Contribution:</h4>
-                        <ul>
-                        @for (task of dev.contribution; track task) {
-                            <li>{{ task }}</li>
-                        }
-                        </ul>
-                        <a [href]="dev.gitHub" target="_blank" rel="noopener noreferrer" (click)="$event.stopPropagation()">
-                            GitHub Profile
-                        </a>
-                    </mat-card-content>
-                </div>
+  </ul>
+
+  <h3>Our team</h3>
+  <div class="about__team">
+    @for (dev of developers; track dev.name; let ind = $index) {
+      <mat-card
+        class="about__card"
+        (click)="toggleFlip(ind)"
+        [class.about__card--flipped]="flippedCard === ind"
+      >
+        <div class="about__card-inner">
+          <div class="card-front">
+            <mat-card-title>{{ dev.name }}</mat-card-title>
+            <div class="img-frame">
+              <img [src]="dev.avatar" alt="{{ dev.name }}" />
             </div>
-            </mat-card>
-        }
-    </div>
-    
-    <h4>WordMap. Let’s learn words together!</h4>
-    <h4>Thank you, RS School, for the opportunity to learn!</h4>
+
+            <mat-card-subtitle>{{ dev.role }}</mat-card-subtitle>
+          </div>
+          <div class="card-back">
+            <mat-card-content>
+              <p>{{ dev.about }}</p>
+              <p><b>Stack:</b> {{ dev.stack }}</p>
+              <h4>Contribution:</h4>
+              <ul>
+                @for (task of dev.contribution; track task) {
+                  <li>{{ task }}</li>
+                }
+              </ul>
+              <a
+                [href]="dev.gitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+                (click)="$event.stopPropagation()"
+              >
+                GitHub Profile
+              </a>
+            </mat-card-content>
+          </div>
+        </div>
+      </mat-card>
+    }
+  </div>
+
+  <h4>WordMap. Let’s learn words together!</h4>
+  <h4>Thank you, RS School, for the opportunity to learn!</h4>
 </div>

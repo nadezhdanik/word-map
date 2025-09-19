@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   imports: [RouterModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
   public categoryService = inject(CategoryServiceMock);
@@ -21,7 +21,7 @@ export class Home {
   //private categoryService = inject(CategoryService);
   private router = inject(Router);
 
-  public loadCategories (level: string): void {
+  public loadCategories(level: string): void {
     this.selectedLevel.set(level);
     this.categories = this.categoryService.getCategories(level);
   }

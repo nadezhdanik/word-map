@@ -9,7 +9,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   imports: [RouterLink],
   templateUrl: './category.html',
   styleUrl: './category.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Category {
   public words = signal<Word[]>([]);
@@ -24,7 +24,6 @@ export class Category {
 
   constructor() {
     effect(() => {
-
       console.log('effect triggered', this.paramMapSignal());
 
       const params = this.paramMapSignal();

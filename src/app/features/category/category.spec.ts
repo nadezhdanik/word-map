@@ -16,10 +16,10 @@ describe('Category', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            paramMap: of(convertToParamMap({ level: 'A1', category: 'Food' }))
-          }
-        }
-      ]
+            paramMap: of(convertToParamMap({ level: 'A1', category: 'Food' })),
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Category);
