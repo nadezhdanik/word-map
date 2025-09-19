@@ -1,4 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
+import { UserService } from '../user/user';
 import {
   Auth as FirebaseAuth,
   createUserWithEmailAndPassword,
@@ -17,6 +18,7 @@ export class Auth {
   public isUserLoggedIn = signal<boolean>(false);
 
   private auth = inject(FirebaseAuth);
+  private userService = inject(UserService);
 
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
@@ -25,19 +27,33 @@ export class Auth {
   }
 
   public async register(email: string, password: string): Promise<UserCredential> {
-    return await createUserWithEmailAndPassword(this.auth, email, password);
+    const registerResult = await createUserWithEmailAndPassword(this.auth, email, password);
+    await this.ensureUserDoc(registerResult.user);
+    return registerResult;
   }
 
   public async login(email: string, password: string): Promise<UserCredential> {
-    return await signInWithEmailAndPassword(this.auth, email, password);
+    const loginResult = await signInWithEmailAndPassword(this.auth, email, password);
+    await this.ensureUserDoc(loginResult.user);
+    return loginResult;
   }
 
   public async googleSignIn(): Promise<UserCredential> {
     const provider = new GoogleAuthProvider();
-    return await signInWithPopup(this.auth, provider);
+    const googleSignResult = await signInWithPopup(this.auth, provider);
+    await this.ensureUserDoc(googleSignResult.user);
+    return googleSignResult;
   }
 
   public async logout(): Promise<void> {
     return await signOut(this.auth);
+  }
+
+  private async ensureUserDoc(user: UserCredential['user']) {
+    await this.userService.createUserDoc(
+      user.uid,
+      user.email ?? '',
+      user.displayName ?? ''
+    );
   }
 }
