@@ -15,13 +15,12 @@ describe('Auth', () => {
             onAuthStateChanged: jasmine.createSpy(),
             createUserWithEmailAndPassword: jasmine.createSpy(),
             signInWithEmailAndPassword: jasmine.createSpy(),
-            signOut: jasmine.createSpy()
-          }
-        }
-      ]
+            signOut: jasmine.createSpy(),
+          },
+        },
+      ],
     });
     service = TestBed.inject(Auth);
-
   });
 
   it('should be created', () => {

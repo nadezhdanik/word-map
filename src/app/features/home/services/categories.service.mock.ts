@@ -4,11 +4,11 @@ import { Category } from '../interfaces/categories.interface';
 import { Word } from '../interfaces/word.interface';
 
 @Injectable({
-    providedIn: 'root'
-  })
-  export class CategoryServiceMock {
-    public selectedWords = signal<Word[]>([]);
-    private categories = signal<Category[]>([]);
+  providedIn: 'root',
+})
+export class CategoryServiceMock {
+  public selectedWords = signal<Word[]>([]);
+  private categories = signal<Category[]>([]);
 
   constructor() {
     this.setLevel('A1');
@@ -21,9 +21,9 @@ import { Word } from '../interfaces/word.interface';
 
   public getWords(level: string, category: string): Word[] {
     const words = wordsData as Word[];
-    return words.filter(word => word.level === level && word.category === category);
+    return words.filter((word) => word.level === level && word.category === category);
   }
-  
+
   public selectCategory(level: string, category: string): void {
     const words = this.getWords(level, category);
     this.selectedWords.set(words);
@@ -33,11 +33,12 @@ import { Word } from '../interfaces/word.interface';
     const counts = new Map<string, number>();
     const words = wordsData as Word[];
 
-    words.filter(word => word.level === level)
-    .forEach(word => {
-      const prev = counts.get(word.category) || 0;
-      counts.set(word.category, prev + 1);
-    });
+    words
+      .filter((word) => word.level === level)
+      .forEach((word) => {
+        const prev = counts.get(word.category) || 0;
+        counts.set(word.category, prev + 1);
+      });
 
     const result: Category[] = Array.from(counts, ([name, count]) => ({ name, count }));
     this.categories.set(result);

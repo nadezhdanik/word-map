@@ -1,7 +1,7 @@
 export interface Word {
-    word: string;
-    translation: string;
-    level: string;
-    category: string;
-    partOfSpeech: string;
-  }
+  word: string;
+  translation: string;
+  level: string;
+  category: string;
+  partOfSpeech: string;
+}

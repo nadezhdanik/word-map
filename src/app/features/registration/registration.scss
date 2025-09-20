@@ -7,7 +7,7 @@
   justify-self: center;
   margin: 10px;
 
-  h2{
+  h2 {
     text-transform: uppercase;
     margin: 0;
     padding: 1rem;
@@ -31,7 +31,6 @@
     }
 
     @media (hover: hover) {
-
       &:hover {
         color: var(--accent-blue);
       }
