@@ -13,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 import { CategoryServiceMock } from '../../../home/services/categories.service.mock';
 import { ActivatedRoute } from '@angular/router';
 import { Word } from '../../../home/interfaces/word.interface';
+import { COUNT_MODE } from './models/count-mods.enum';
 
 @Component({
   selector: 'app-match-pairs',
@@ -26,6 +27,7 @@ export class MatchPairs implements OnInit {
   public easyMode = false;
   public gameWon = false;
   public words: Word[] = [];
+  public countMode: COUNT_MODE.ALL | COUNT_MODE.HALF = COUNT_MODE.ALL;
 
   private firstCard: Card | null = null;
   private secondCard: Card | null = null;
@@ -45,22 +47,31 @@ export class MatchPairs implements OnInit {
   }
 
   public createCards(): void {
-    this.words.forEach((element, index) => {
+    let selectedWords = [...this.words];
+
+    if (this.countMode === COUNT_MODE.HALF) {
+      const half = Math.floor(selectedWords.length / 2);
+      selectedWords = [...selectedWords].sort(() => Math.random() - 0.5).slice(0, half);
+    }
+
+    this.cards = [];
+
+    selectedWords.forEach((element, index) => {
       this.cards.push({
         content: element.word,
         pairId: index,
         type: TYPE.EN,
-        opened: this.easyMode,
+        opened: false,
         matched: false,
       });
     });
 
-    this.words.forEach((element, index) => {
+    selectedWords.forEach((element, index) => {
       this.cards.push({
         content: element.translation,
         pairId: index,
         type: TYPE.RUS,
-        opened: this.easyMode,
+        opened: false,
         matched: false,
       });
     });
@@ -100,8 +111,12 @@ export class MatchPairs implements OnInit {
         this.checkIfGameIsWon();
         this.resetCards();
       } else {
+        this.firstCard.error = true;
+        this.secondCard.error = true;
         setTimeout(() => {
           if (this.firstCard && this.secondCard) {
+            this.firstCard.error = false;
+            this.secondCard.error = false;
             this.firstCard.opened = false;
             this.secondCard.opened = false;
             this.resetCards();
@@ -124,7 +139,6 @@ export class MatchPairs implements OnInit {
     this.isLocked = false;
     this.firstCard = null;
     this.secondCard = null;
-    this.easyMode = false;
     this.cards = [];
 
     this.createCards();

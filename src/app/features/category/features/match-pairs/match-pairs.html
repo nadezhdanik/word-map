@@ -1,16 +1,29 @@
 <div class="game">
   <div class="game__header">
-    <h2 class="game__title">MATCH-PAIRS</h2>
+    <h2 class="game__title">MATCH PAIRS</h2>
     <div class="game__mode-control">
-      <span class="game__mode-label">MODE:</span>
+      <div class="game__mode-buttons">
+        <button class="btn icon" (click)="restartGame()">
+          <mat-icon>sports_esports</mat-icon>NEW GAME
+        </button>
+        <button class="btn icon" (click)="shuffleCards()">
+          <mat-icon>sync</mat-icon>
+        </button>
+      </div>
+
+      <mat-button-toggle-group
+        [(ngModel)]="countMode"
+        (change)="restartGame()"
+        name="cardsCountToggle"
+      >
+        <mat-button-toggle value="all">ALL</mat-button-toggle>
+        <mat-button-toggle value="half">HALF</mat-button-toggle>
+      </mat-button-toggle-group>
+
       <mat-button-toggle-group [(ngModel)]="easyMode" name="modeToggle">
         <mat-button-toggle [value]="true">EASY</mat-button-toggle>
         <mat-button-toggle [value]="false">HARD</mat-button-toggle>
       </mat-button-toggle-group>
-      <button class="btn icon" (click)="restartGame()">
-        <mat-icon>sports_esports</mat-icon>NEW GAME
-      </button>
-      <button class="btn icon" (click)="shuffleCards()"><mat-icon>sync</mat-icon></button>
     </div>
   </div>
   <div class="game__cards">
@@ -19,6 +32,7 @@
         class="card bg-card"
         (click)="onCardClick(card)"
         [class.selected]="card.opened"
+        [class.error]="card.error"
         [class.win]="gameWon"
       >
         <div class="card-content">
