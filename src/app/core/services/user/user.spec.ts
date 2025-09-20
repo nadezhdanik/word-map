@@ -7,10 +7,7 @@ describe('UserService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        UserService,
-        { provide: Firestore, useValue: {} }
-      ],
+      providers: [UserService, { provide: Firestore, useValue: {} }],
     });
     service = TestBed.inject(UserService);
   });

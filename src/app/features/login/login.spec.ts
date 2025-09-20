@@ -21,7 +21,7 @@ describe('Login', () => {
         },
         {
           provide: Firestore,
-          useValue: {}
+          useValue: {},
         },
       ],
     }).compileComponents();

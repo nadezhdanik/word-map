@@ -21,7 +21,7 @@ describe('Header', () => {
         },
         {
           provide: Firestore,
-          useValue: {}
+          useValue: {},
         },
       ],
     }).compileComponents();

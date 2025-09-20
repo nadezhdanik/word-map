@@ -22,7 +22,7 @@ describe('Registration', () => {
         },
         {
           provide: Firestore,
-          useValue: {}
+          useValue: {},
         },
       ],
     }).compileComponents();

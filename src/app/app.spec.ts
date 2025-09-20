@@ -18,7 +18,7 @@ describe('App', () => {
         },
         {
           provide: Firestore,
-          useValue: {}
+          useValue: {},
         },
       ],
     }).compileComponents();

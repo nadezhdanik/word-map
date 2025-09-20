@@ -21,7 +21,7 @@ describe('Auth', () => {
         },
         {
           provide: Firestore,
-          useValue: {}
+          useValue: {},
         },
       ],
     });
