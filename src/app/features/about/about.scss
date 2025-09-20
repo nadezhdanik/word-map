@@ -4,6 +4,7 @@
   flex-direction: column;
   max-width: 800px;
   align-items: center;
+  color: inherit;
 
   h1 {
     background: var(--gradient-rainbow);
@@ -16,10 +17,12 @@
 
   h3 {
     margin: 1.5rem 0 0.6rem 0;
+    color: inherit;
   }
 
   h4 {
     margin: 0.5rem 0 0 0;
+    color: inherit;
   }
 
   ul {
@@ -38,6 +41,7 @@
     box-sizing: border-box;
     background-color: transparent;
     margin-bottom: 1.5rem;
+    color: inherit;
 
     .about__card-inner {
       position: relative;
@@ -63,11 +67,29 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      background: white;
       transition:
         transform 0.3s,
-        box-shadow 0.3s;
+    }
+
+    body.light .about__card {
+      .card-front,
+      .card-back {
+        background: var(--light-card-bg);
+        color: var(--light-text);
+      }
+    }
+    
+    body.dark .about__card {
+      .card-front,
+      .card-back {
+        background: var(--dark-card-bg);
+        color: var(--dark-text);
+      }
+    }
+
+    .card-front p {
+      font-size: 0.8rem;
+      color: var(--accent-purple);
     }
 
     .card-back {
@@ -81,6 +103,9 @@
         text-decoration: none;
         color: var(--accent-purple);
         margin-left: 3rem;
+      }
+      a:hover {
+        color: var(--accent-blue);
       }
     }
 
@@ -112,6 +137,7 @@
 
     mat-card-subtitle {
       text-align: center;
+      color: inherit;
     }
   }
 }
