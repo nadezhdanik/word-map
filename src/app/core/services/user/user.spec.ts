@@ -1,8 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { UserService } from './user';
-import { firebaseConfig } from '../../firebase/firebase.config';
 
 describe('UserService', () => {
   let service: UserService;
@@ -11,8 +9,7 @@ describe('UserService', () => {
     TestBed.configureTestingModule({
       providers: [
         UserService,
-        provideFirebaseApp(() => initializeApp(firebaseConfig)),
-        provideFirestore(() => getFirestore()),
+        { provide: Firestore, useValue: {} }
       ],
     });
     service = TestBed.inject(UserService);
