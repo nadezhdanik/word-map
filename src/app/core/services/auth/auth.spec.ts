@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Auth as FirebaseAuth } from '@angular/fire/auth';
 import { Auth } from './auth';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('Auth', () => {
   let service: Auth;
@@ -17,6 +18,10 @@ describe('Auth', () => {
             signInWithEmailAndPassword: jasmine.createSpy(),
             signOut: jasmine.createSpy(),
           },
+        },
+        {
+          provide: Firestore,
+          useValue: {},
         },
       ],
     });

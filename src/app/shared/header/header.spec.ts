@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { Firestore } from '@angular/fire/firestore';
 import { Header } from './header';
 import { provideRouter } from '@angular/router';
 import { Auth as FirebaseAuth } from '@angular/fire/auth';
@@ -18,6 +18,10 @@ describe('Header', () => {
           useValue: {
             onAuthStateChanged: jasmine.createSpy(),
           },
+        },
+        {
+          provide: Firestore,
+          useValue: {},
         },
       ],
     }).compileComponents();

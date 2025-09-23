@@ -3,6 +3,7 @@ import { Auth as FirebaseAuth } from '@angular/fire/auth';
 
 import { Registration } from './registration';
 import { provideRouter } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('Registration', () => {
   let component: Registration;
@@ -18,6 +19,10 @@ describe('Registration', () => {
           useValue: {
             onAuthStateChanged: jasmine.createSpy(),
           },
+        },
+        {
+          provide: Firestore,
+          useValue: {},
         },
       ],
     }).compileComponents();

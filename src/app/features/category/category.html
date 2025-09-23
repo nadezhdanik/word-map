@@ -1,13 +1,19 @@
-<h2>{{ level() }} {{ category() }}</h2>
+<h2>{{ level() }} - {{ category() }}</h2>
 
-<ul>
-  @for (word of words(); track word.word) {
-    <li>{{ word.word }} — {{ word.translation }}</li>
-  }
-</ul>
+<button class="btn primary" [routerLink]="['/category', level(), category(), 'learn-words']">
+  Learn words
+</button>
+
+<button class="btn primary" [routerLink]="['/category', level(), category(), 'edit-words-list']">
+  Edit words list
+</button>
 
 <button class="btn primary" [routerLink]="['/category', level(), category(), 'pairs']">
-  Match-pairs
+  Match pairs
+</button>
+
+<button class="btn primary" [routerLink]="['/category', level(), category(), 'odd-one-out']">
+  Odd one out
 </button>
 
 <button class="btn primary" [routerLink]="['/category', level(), category(), 'true-false']">

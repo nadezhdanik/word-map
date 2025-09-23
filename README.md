@@ -1,28 +1,26 @@
 # 🌍 WordMap — Expand Your English Vocabulary
 
 - 🔗 [Live Demo](https://word-map.netlify.app)
-- 🐞 [Report Issue](https://github.com/nadezhdanik/word-map/issues)  
+- 🐞 [Report Issue](https://github.com/nadezhdanik/word-map/issues)
 
-## 📖 Overview  
+## 📖 Overview
+
 **WordMap** is a lightweight, offline-capable app designed to help learners grow their English vocabulary.  
 From **A1 beginners** to **B2 upper-intermediate**, WordMap adapts to your level, interests, and pace.  
-No ads. No clutter. Just ⚡ speed and focus.  
+No ads. No clutter. Just ⚡ speed and focus.
 
+## 🛠️ Tech Stack
 
-## 🛠️ Tech Stack  
+| Area                     | Tools                                                |
+| ------------------------ | ---------------------------------------------------- |
+| **Frontend**             | Angular v20.2.2, TypeScript, HTML, SCSS, Vite, Karma |
+| **Backend**              | Firebase (auth, storage, sync)                       |
+| **DevOps**               | ESLint                                               |
+| **Management**           | GitHub Projects, Discord                             |
+| **Features Implemented** | Signals, Lazy loading, Guards, Reactive Forms        |
+| **Accessibility**        | Semantic HTML, ARIA labels, keyboard navigation      |
 
-| Area        | Tools |
-|-------------|--------------------------------------------------|
-| **Frontend** | Angular v20.2.2, TypeScript, HTML, SCSS, Vite, Karma |
-| **Backend**  | Firebase (auth, storage, sync) |
-| **DevOps**   | ESLint |
-| **Management** | GitHub Projects, Discord |
-| **Features Implemented** | Signals, Lazy loading, Guards, Reactive Forms |
-| **Accessibility** | Semantic HTML, ARIA labels, keyboard navigation |
-
-
-
-## 🚀 Getting Started  
+## 🚀 Getting Started
 
 ```bash
 # Clone repository
@@ -39,33 +37,37 @@ npm run start
 ```
 
 ## 📜 Scripts
+
 The following NPM scripts are available for development, formatting, linting, and testing. Use them with:
 
 ```
 npm run <script-name>
 ```
 
-| Script       | Description |
-|--------------|-------------|
-| `start`      | Run dev server at [localhost:4200](http://localhost:4200) |
-| `build`      | Build project for production (`dist/`) |
-| `watch`      | Dev build with file watching |
-| `lint`       | Run ESLint checks |
-| `test`       | Run unit tests |
- 
+| Script  | Description                                               |
+| ------- | --------------------------------------------------------- |
+| `start` | Run dev server at [localhost:4200](http://localhost:4200) |
+| `build` | Build project for production (`dist/`)                    |
+| `watch` | Dev build with file watching                              |
+| `lint`  | Run ESLint checks                                         |
+| `test`  | Run unit tests                                            |
+
 ## ⚡ Angular Tips
 
 Generate a new component:
+
 ```
 ng generate component component-name
 ```
 
 List all available schematics:
+
 ```
 ng generate --help
 ```
 
 ## 👥 Team
+
 🙈 [Tatsiana Hatskaya](https://github.com/TatsHats)
 
 🙉 [Nadezhda Memelova](https://github.com/nadezhdanik)
