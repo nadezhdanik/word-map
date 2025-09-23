@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { App } from './app';
 import { provideRouter } from '@angular/router';
 import { Auth as FirebaseAuth } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('App', () => {
   beforeEach(async () => {
@@ -14,6 +15,10 @@ describe('App', () => {
           useValue: {
             onAuthStateChanged: jasmine.createSpy(),
           },
+        },
+        {
+          provide: Firestore,
+          useValue: {},
         },
       ],
     }).compileComponents();

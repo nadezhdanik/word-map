@@ -1,4 +1,5 @@
 import { inject, Injectable, signal } from '@angular/core';
+import { UserService } from '../user/user';
 import {
   Auth as FirebaseAuth,
   createUserWithEmailAndPassword,
@@ -17,6 +18,7 @@ export class Auth {
   public isUserLoggedIn = signal<boolean>(false);
 
   private auth = inject(FirebaseAuth);
+  private userService = inject(UserService);
 
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
@@ -25,16 +27,22 @@ export class Auth {
   }
 
   public async register(email: string, password: string): Promise<UserCredential> {
-    return await createUserWithEmailAndPassword(this.auth, email, password);
+    const result = await createUserWithEmailAndPassword(this.auth, email, password);
+    await this.userService.ensureUserDoc(result.user);
+    return result;
   }
 
   public async login(email: string, password: string): Promise<UserCredential> {
-    return await signInWithEmailAndPassword(this.auth, email, password);
+    const result = await signInWithEmailAndPassword(this.auth, email, password);
+    await this.userService.ensureUserDoc(result.user);
+    return result;
   }
 
   public async googleSignIn(): Promise<UserCredential> {
     const provider = new GoogleAuthProvider();
-    return await signInWithPopup(this.auth, provider);
+    const result = await signInWithPopup(this.auth, provider);
+    await this.userService.ensureUserDoc(result.user);
+    return result;
   }
 
   public async logout(): Promise<void> {
