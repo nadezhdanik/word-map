@@ -11,13 +11,14 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIcon } from '@angular/material/icon';
 import { CategoryServiceMock } from '../../../home/services/categories.service.mock';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Word } from '../../../home/interfaces/word.interface';
 import { COUNT_MODE } from './models/count-mods.enum';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-match-pairs',
-  imports: [FormsModule, MatButtonToggleModule, MatIcon],
+  imports: [FormsModule, MatButtonToggleModule, MatIcon, MatTooltipModule],
   templateUrl: './match-pairs.html',
   styleUrl: './match-pairs.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,6 +29,8 @@ export class MatchPairs implements OnInit {
   public gameWon = false;
   public words: Word[] = [];
   public countMode: COUNT_MODE.ALL | COUNT_MODE.HALF = COUNT_MODE.ALL;
+  public level = '';
+  public category = '';
 
   private firstCard: Card | null = null;
   private secondCard: Card | null = null;
@@ -35,12 +38,15 @@ export class MatchPairs implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private route = inject(ActivatedRoute);
   private categoryService = inject(CategoryServiceMock);
+  private router = inject(Router);
 
   public ngOnInit(): void {
     const level = this.route.snapshot.paramMap.get('level');
     const category = this.route.snapshot.paramMap.get('category');
 
     if (level && category) {
+      this.level = level;
+      this.category = category;
       this.words = this.categoryService.getWords(level, category);
       this.createCards();
     }
@@ -132,6 +138,10 @@ export class MatchPairs implements OnInit {
     this.firstCard = null;
     this.secondCard = null;
     this.isLocked = false;
+  }
+
+  public toBack(): void {
+    this.router.navigate(['/category', this.level, this.category]);
   }
 
   public restartGame(): void {

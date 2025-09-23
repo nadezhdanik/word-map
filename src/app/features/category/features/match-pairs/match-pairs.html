@@ -3,10 +3,23 @@
     <h2 class="game__title">MATCH PAIRS</h2>
     <div class="game__mode-control">
       <div class="game__mode-buttons">
-        <button class="btn icon" (click)="restartGame()">
+        <button class="btn icon" aria-label="Go to back" matTooltip="Back" (click)="toBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button
+          class="btn icon"
+          aria-label="New Game"
+          matTooltip="New Game"
+          (click)="restartGame()"
+        >
           <mat-icon>sports_esports</mat-icon>NEW GAME
         </button>
-        <button class="btn icon" (click)="shuffleCards()">
+        <button
+          class="btn icon"
+          aria-label="Mix the cards"
+          matTooltip="Mix Cards"
+          (click)="shuffleCards()"
+        >
           <mat-icon>sync</mat-icon>
         </button>
       </div>
