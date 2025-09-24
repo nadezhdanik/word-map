@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth-guard';
+import { noAuthGuard } from './core/guards/no-auth-guard';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -7,12 +9,19 @@ export const routes: Routes = [
   {
     path: 'profile',
     loadComponent: () => import('./features/profile/profile').then((c) => c.Profile),
+    canActivate: [authGuard],
   },
   {
     path: 'registration',
     loadComponent: () => import('./features/registration/registration').then((c) => c.Registration),
+    canActivate: [noAuthGuard],
   },
-  { path: 'login', loadComponent: () => import('./features/login/login').then((c) => c.Login) },
+  {
+    path: 'login',
+    loadComponent: () => import('./features/login/login').then((c) => c.Login),
+    canActivate: [noAuthGuard],
+  },
+
   {
     path: 'category/:level/:category',
     loadComponent: () => import('./features/category/category').then((c) => c.Category),
