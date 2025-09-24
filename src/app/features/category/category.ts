@@ -24,8 +24,6 @@ export class Category {
 
   constructor() {
     effect(() => {
-      console.log('effect triggered', this.paramMapSignal());
-
       const params = this.paramMapSignal();
       const level = params?.get('level');
       const category = params?.get('category');

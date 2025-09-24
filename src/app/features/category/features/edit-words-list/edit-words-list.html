@@ -1,1 +1,19 @@
-<p>edit-words-list works!</p>
+<div class="category-page">
+    <h2>{{ category() }} - {{ level() }}</h2>
+  
+    <ul>
+      @for (word of wordsWithStatus(); track word.wordId) {
+        <li>
+            <span>{{ word.word }}</span>
+    
+            <label class="toggle">
+                <input
+                  type="checkbox"
+                  [checked]="word.status === 'learned'"
+                  (change)="toggleLearned(word)"
+                />
+              </label>
+          </li>
+      }
+    </ul>
+  </div>

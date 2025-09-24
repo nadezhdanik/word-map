@@ -1,9 +1,7 @@
-//import { CategoryService } from './services/categories.service';
-import { ChangeDetectionStrategy, Component, Signal, inject, signal } from '@angular/core';
-import { CategoryServiceMock } from './services/categories.service.mock';
-import { Category } from './interfaces/categories.interface';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
+import { CategoryService } from './services/categories.service';
 
 @Component({
   selector: 'app-home',
@@ -13,21 +11,24 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {
-  public categoryService = inject(CategoryServiceMock);
-  public levels: string[] = ['A1', 'A2', 'B1', 'B2'];
-  public selectedLevel = signal<string>('A1');
-  public categories: Signal<Category[]> = this.categoryService.getCategories(this.selectedLevel());
-
-  //private categoryService = inject(CategoryService);
+  public categoryService = inject(CategoryService);
   private router = inject(Router);
 
-  public loadCategories(level: string): void {
-    this.selectedLevel.set(level);
-    this.categories = this.categoryService.getCategories(level);
+  public levels: string[] = ['A1', 'A2', 'B1', 'B2'];
+  public selectedLevel = signal<string>('A1');
+  public categories = this.categoryService.categories;
+
+  constructor() {
+    this.loadCategories(this.selectedLevel());
   }
 
-  public goToCategory(level: string, category: string): void {
-    this.categoryService.selectCategory(level, category);
+  public async loadCategories(level: string): Promise<void> {
+    this.selectedLevel.set(level);
+    await this.categoryService.getCategories(level);
+  }
+
+  public async goToCategory(level: string, category: string): Promise<void> {
+    await this.categoryService.selectCategory(level, category);
     this.router.navigate(['/category', level, category]);
   }
 }
