@@ -53,5 +53,8 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/category/features/true-false/true-false').then((c) => c.TrueFalse),
   },
-  { path: '**', redirectTo: 'home' },
+  {
+    path: '**',
+    loadComponent: () => import('./features/not-found/not-found').then((c) => c.NotFound),
+  },
 ];
