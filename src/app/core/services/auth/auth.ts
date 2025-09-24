@@ -9,6 +9,9 @@ import {
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
+  User,
+  sendEmailVerification,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -16,6 +19,7 @@ import {
 })
 export class Auth {
   public isUserLoggedIn = signal<boolean>(false);
+  public user = signal<User | null>(null);
 
   private auth = inject(FirebaseAuth);
   private userService = inject(UserService);
@@ -23,6 +27,7 @@ export class Auth {
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
       this.isUserLoggedIn.set(!!user);
+      this.user.set(user);
     });
   }
 
@@ -47,5 +52,21 @@ export class Auth {
 
   public async logout(): Promise<void> {
     return await signOut(this.auth);
+  }
+
+  public async verifyEmail(): Promise<void> {
+    const currentUser = this.auth.currentUser;
+    if (currentUser) {
+      await sendEmailVerification(currentUser);
+    } else {
+      throw new Error('No user logged in');
+    }
+  }
+
+  public async resetPassword(email: string): Promise<void> {
+    if (!email) {
+      throw new Error('Email is required to reset password');
+    }
+    await sendPasswordResetEmail(this.auth, email);
   }
 }

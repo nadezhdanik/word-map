@@ -1,1 +1,27 @@
-<p>profile works!</p>
+<div class="profile auth">
+  <div class="profile__header">
+    <h2>{{ authService.user()?.displayName || 'No Name' }}</h2>
+    <p>{{ authService.user()?.email }}</p>
+  </div>
+
+  @if (!isVerifyEmail()) {
+    <div class="profile__status profile__status--warning">
+      <p>
+        Your email is not verified yet.<br />
+        You need to verify it before you can change your password.
+      </p>
+      <button class="btn warning" (click)="verifyEmail()">Send Verification Email</button>
+    </div>
+  } @else {
+    <div class="profile__status profile__status--success">
+      <p>Email is verified ✅</p>
+    </div>
+  }
+
+  <div class="profile__actions">
+    <button class="btn primary" (click)="changePassword()" [disabled]="!isVerifyEmail()">
+      Change Password
+    </button>
+    <button class="btn secondary" (click)="logout()">Logout</button>
+  </div>
+</div>
