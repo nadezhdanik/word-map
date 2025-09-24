@@ -4,4 +4,5 @@ export interface Card {
   type: string;
   opened?: boolean;
   matched?: boolean;
+  error?: boolean;
 }

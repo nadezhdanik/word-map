@@ -11,12 +11,14 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIcon } from '@angular/material/icon';
 import { CategoryServiceMock } from '../../../home/services/categories.service.mock';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Word } from '../../../home/interfaces/word.interface';
+import { COUNT_MODE } from './models/count-mods.enum';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-match-pairs',
-  imports: [FormsModule, MatButtonToggleModule, MatIcon],
+  imports: [FormsModule, MatButtonToggleModule, MatIcon, MatTooltipModule],
   templateUrl: './match-pairs.html',
   styleUrl: './match-pairs.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +28,9 @@ export class MatchPairs implements OnInit {
   public easyMode = false;
   public gameWon = false;
   public words: Word[] = [];
+  public countMode: COUNT_MODE.ALL | COUNT_MODE.HALF = COUNT_MODE.ALL;
+  public level = '';
+  public category = '';
 
   private firstCard: Card | null = null;
   private secondCard: Card | null = null;
@@ -33,34 +38,46 @@ export class MatchPairs implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private route = inject(ActivatedRoute);
   private categoryService = inject(CategoryServiceMock);
+  private router = inject(Router);
 
   public ngOnInit(): void {
     const level = this.route.snapshot.paramMap.get('level');
     const category = this.route.snapshot.paramMap.get('category');
 
     if (level && category) {
+      this.level = level;
+      this.category = category;
       this.words = this.categoryService.getWords(level, category);
       this.createCards();
     }
   }
 
   public createCards(): void {
-    this.words.forEach((element, index) => {
+    let selectedWords = [...this.words];
+
+    if (this.countMode === COUNT_MODE.HALF) {
+      const half = Math.floor(selectedWords.length / 2);
+      selectedWords = [...selectedWords].sort(() => Math.random() - 0.5).slice(0, half);
+    }
+
+    this.cards = [];
+
+    selectedWords.forEach((element, index) => {
       this.cards.push({
         content: element.word,
         pairId: index,
         type: TYPE.EN,
-        opened: this.easyMode,
+        opened: false,
         matched: false,
       });
     });
 
-    this.words.forEach((element, index) => {
+    selectedWords.forEach((element, index) => {
       this.cards.push({
         content: element.translation,
         pairId: index,
         type: TYPE.RUS,
-        opened: this.easyMode,
+        opened: false,
         matched: false,
       });
     });
@@ -100,8 +117,12 @@ export class MatchPairs implements OnInit {
         this.checkIfGameIsWon();
         this.resetCards();
       } else {
+        this.firstCard.error = true;
+        this.secondCard.error = true;
         setTimeout(() => {
           if (this.firstCard && this.secondCard) {
+            this.firstCard.error = false;
+            this.secondCard.error = false;
             this.firstCard.opened = false;
             this.secondCard.opened = false;
             this.resetCards();
@@ -119,12 +140,15 @@ export class MatchPairs implements OnInit {
     this.isLocked = false;
   }
 
+  public toBack(): void {
+    this.router.navigate(['/category', this.level, this.category]);
+  }
+
   public restartGame(): void {
     this.gameWon = false;
     this.isLocked = false;
     this.firstCard = null;
     this.secondCard = null;
-    this.easyMode = false;
     this.cards = [];
 
     this.createCards();
