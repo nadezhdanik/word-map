@@ -1,7 +1,7 @@
 <div class="profile auth">
   <div class="profile__header">
-    <h2>{{ authService.user()?.displayName || 'No Name' }}</h2>
-    <p>{{ authService.user()?.email }}</p>
+    <h2>{{ authService.user()?.displayName || 'No Name' | uppercase }}</h2>
+    <p>{{ authService.user()?.email | lowercase }}</p>
   </div>
 
   @if (!isVerifyEmail()) {

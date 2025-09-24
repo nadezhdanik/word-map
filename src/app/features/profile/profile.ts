@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { Auth } from '../../core/services/auth/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { LowerCasePipe, UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [UpperCasePipe, LowerCasePipe],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
