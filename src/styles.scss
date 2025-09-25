@@ -194,11 +194,15 @@ body.dark {
   }
 
   &.warning {
-    background-color: var(--accent-red);
-    color: white;
+    background-color: transparent;
+    border: 2px solid var(--accent-red);
+    color: var(--accent-red);
 
-    &:hover {
-      background-color: var(--accent-yellow);
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--accent-red);
+        color: var(--light-card-bg);
+      }
     }
   }
 
