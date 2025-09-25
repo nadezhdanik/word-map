@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Word } from '../../../home/interfaces/word.interface';
 import { CategoryServiceMock } from '../../../home/services/categories.service.mock';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from './models/card.model';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
@@ -20,10 +20,13 @@ export class TrueFalse implements OnInit {
   public choiceMade = signal(false);
   public result = signal('');
 
+  private level = '';
+  private category = '';
   private words: Word[] = [];
 
   private categoryServiceMock = inject(CategoryServiceMock);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   public ngOnInit(): void {
     this.resetGame();
@@ -39,6 +42,9 @@ export class TrueFalse implements OnInit {
     }
 
     this.choiceMade.set(true);
+    setTimeout(() => {
+      this.resetGame();
+    }, 1500);
   }
 
   public resetGame(): void {
@@ -49,6 +55,8 @@ export class TrueFalse implements OnInit {
     const category = this.route.snapshot.paramMap.get('category');
 
     if (level && category) {
+      this.level = level;
+      this.category = category;
       this.words = this.categoryServiceMock.getWords(level, category);
     }
 
@@ -59,6 +67,10 @@ export class TrueFalse implements OnInit {
     this.displayedTranslation.set(
       isCorrectTranslation ? this.firstCard.translation : this.secondCard.translation,
     );
+  }
+
+  public goBack(): void {
+    this.router.navigate(['/category', this.level, this.category]);
   }
 
   private getRandomWord(card: Card): void {
