@@ -1,19 +1,25 @@
 <div class="category-page">
-    <h2>{{ category() }} - {{ level() }}</h2>
-  
-    <ul>
-      @for (word of wordsWithStatus(); track word.wordId) {
-        <li>
-            <span>{{ word.word }}</span>
-    
-            <label class="toggle">
-                <input
-                  type="checkbox"
-                  [checked]="word.status === 'learned'"
-                  (change)="toggleLearned(word)"
-                />
-              </label>
-          </li>
-      }
-    </ul>
+  <h2>{{ category() }} - {{ level() }}</h2>
+
+  <ul>
+    @for (word of wordsWithStatus(); track word.wordId) {
+      <li [style.opacity]="word.status === 'learned' ? 0.5 : 1">
+        <span>{{ word.word }}</span>
+
+        <label class="toggle">
+          <input
+            type="checkbox"
+            [checked]="word.status === 'learned'"
+            (change)="toggleLearned(word)"
+          />
+        </label>
+      </li>
+    }
+  </ul>
+  <div class="buttons">
+    <button class="btn primary" (click)="router.navigate(['../'], { relativeTo: route })">
+      Back
+    </button>
+    <button class="btn primary" (click)="saveLearnedWords()">Save</button>
   </div>
+</div>

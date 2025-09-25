@@ -9,7 +9,7 @@
         [class.active]="level === selectedLevel()"
       >
         {{ level }}
-        <p class="progress">12%</p>
+        <p class="progress">>{{ levelProgress().percent }}%</p>
       </button>
     }
   }
@@ -18,14 +18,14 @@
 <hr />
 
 <div class="categories">
-  @for (category of categories(); track category.name) {
+  @for (category of categoriesWithProgress(); track category.name) {
     <button
       class="category-btn"
       (click)="goToCategory(selectedLevel(), category.name)"
       (keydown.enter)="goToCategory(selectedLevel(), category.name)"
     >
       <p>{{ category.name }}</p>
-      <p>0 / {{ category.count }}</p>
+      <p>{{ category.learnedCount }} / {{ category.totalCount }}</p>
     </button>
   }
 </div>

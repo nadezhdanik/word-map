@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { UserDoc } from '../../models/user.interface';
 import { User } from '@angular/fire/auth';
-import { WordData, WordStatus } from '../../models/words.interface';
+import { WordData, WordProgress, WordStatus } from '../../models/words.interface';
 import { WordService } from '../word/word.service';
 
 @Injectable({
@@ -79,13 +79,13 @@ export class UserService {
     );
   }
 
-  public async getWordProgress(uid: string, wordId: string) {
+  public async getWordProgress(uid: string, wordId: string): Promise<WordProgress | null> {
     const wordRef = doc(this.firestore, `progress/${uid}/words/${wordId}`);
     const snapshot = await getDoc(wordRef);
-    return snapshot.exists() ? snapshot.data() : null;
+    return snapshot.exists() ? (snapshot.data() as WordProgress) : null;
   }
 
-  public async updateWordStatus(uid: string, wordId: string, status: WordStatus) {
+  public async updateWordStatus(uid: string, wordId: string, status: WordStatus): Promise<void> {
     const wordRef = doc(this.firestore, `progress/${uid}/words/${wordId}`);
     await setDoc(wordRef, { status }, { merge: true });
   }
@@ -139,10 +139,10 @@ export class UserService {
   public async ensureUserDoc(user: User): Promise<void> {
     const userRef = doc(this.firestore, `users/${user.uid}`);
     const snapshot = await getDoc(userRef);
-  
+
     if (!snapshot.exists()) {
       await this.createUserDoc(user.uid, user.email ?? '', user.displayName ?? '');
-      const allWords = await this.wordService.getAllWords(); 
+      const allWords = await this.wordService.getAllWords();
       await this.initializeUserProgress(user.uid, allWords);
     }
   }
@@ -176,13 +176,13 @@ export class UserService {
   ): Promise<{ totalCount: number; learnedCount: number; percent: number }> {
     let totalCount = 0;
     let learnedCount = 0;
-  
+
     for (const category of categories) {
       const stats = await this.getCategoryProgress(uid, level, category);
       totalCount += stats.totalCount;
       learnedCount += stats.learnedCount;
     }
-  
+
     return {
       totalCount,
       learnedCount,

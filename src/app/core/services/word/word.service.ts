@@ -1,18 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Firestore, collection, getDocs } from '@angular/fire/firestore';
 import { Word } from '../../models/words.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WordService {
-  constructor(private firestore: Firestore) {}
+  private firestore = inject(Firestore);
 
   public async getAllWords(): Promise<Word[]> {
     const wordsRef = collection(this.firestore, 'words');
     const snapshot = await getDocs(wordsRef);
 
-    return snapshot.docs.map(doc => {
+    return snapshot.docs.map((doc) => {
       const data = doc.data();
 
       const word: Word = {

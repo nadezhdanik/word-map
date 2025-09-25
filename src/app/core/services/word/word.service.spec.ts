@@ -1,19 +1,22 @@
 import { TestBed } from '@angular/core/testing';
-
 import { WordService } from './word.service';
-import { Firestore } from 'firebase/firestore';
+import { CategoryService } from '../../../features/home/services/categories.service';
+import { Firestore } from '@angular/fire/firestore';
 
-describe('Word', () => {
-  let service: WordService;
-
+describe('Tests', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [WordService, { provide: Firestore, useValue: {} }],
+      providers: [WordService, CategoryService, { provide: Firestore, useValue: {} }],
     });
-    service = TestBed.inject(WordService);
   });
 
-  it('should be created', () => {
+  it('should create WordService', () => {
+    const service = TestBed.inject(WordService);
+    expect(service).toBeTruthy();
+  });
+
+  it('should create CategoryService', () => {
+    const service = TestBed.inject(CategoryService);
     expect(service).toBeTruthy();
   });
 });
