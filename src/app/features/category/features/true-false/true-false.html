@@ -10,13 +10,14 @@
     </mat-card>
   </div>
   <div class="true-false__buttons">
-    <button class="btn secondary" (click)="makeChoice(true)">True</button>
-    <button class="btn secondary" (click)="makeChoice(false)">False</button>
+    <button class="btn secondary" (click)="makeChoice(true)" [disabled]="choiceMade()">True</button>
+    <button class="btn secondary" (click)="makeChoice(false)" [disabled]="choiceMade()">
+      False
+    </button>
   </div>
   <p class="true-false__result">
     @if (choiceMade()) {
       {{ result() }}
-      <mat-icon (click)="resetGame()">refresh</mat-icon>
     }
   </p>
 </div>

@@ -39,6 +39,9 @@ export class TrueFalse implements OnInit {
     }
 
     this.choiceMade.set(true);
+    setTimeout(() => {
+      this.resetGame();
+    }, 2000);
   }
 
   public resetGame(): void {
