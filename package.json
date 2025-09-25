@@ -25,10 +25,10 @@
     ]
   },
   "lint-staged": {
-  "src/**/*.{ts,html,scss,css,json,md}": [
-    "prettier --write"
-  ]
-},
+    "src/**/*.{ts,html,scss,css,json,md}": [
+      "prettier --write"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@angular/cdk": "^20.2.2",

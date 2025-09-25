@@ -1,13 +1,15 @@
 import { TestBed } from '@angular/core/testing';
-import { App } from './app';
-import { provideRouter } from '@angular/router';
+import { CanActivateFn, provideRouter } from '@angular/router';
+import { noAuthGuard } from './no-auth-guard';
 import { Auth as FirebaseAuth } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 
-describe('App', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [App],
+describe('noAuthGuard', () => {
+  const executeGuard: CanActivateFn = (...guardParameters) =>
+    TestBed.runInInjectionContext(() => noAuthGuard(...guardParameters));
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       providers: [
         provideRouter([]),
         {
@@ -21,12 +23,10 @@ describe('App', () => {
           useValue: {},
         },
       ],
-    }).compileComponents();
+    });
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should be created', () => {
+    expect(executeGuard).toBeTruthy();
   });
 });
