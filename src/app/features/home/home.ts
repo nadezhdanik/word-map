@@ -21,11 +21,11 @@ export class Home {
   public categoryProgress = signal<
     Record<string, { totalCount: number; learnedCount: number; percent: number }>
   >({});
-  public levelProgress = signal<{ totalCount: number; learnedCount: number; percent: number }>({
-    totalCount: 0,
-    learnedCount: 0,
-    percent: 0,
-  });
+  
+  public levelProgress = signal<Record<
+  string,
+  { totalCount: number; learnedCount: number; percent: number }
+  >>({});
 
   public readonly categoriesWithProgress = computed(() => {
     const cats = this.categories();
@@ -70,9 +70,13 @@ export class Home {
     const levelStats = await this.userService.getLevelProgress(
       uid,
       level,
-      cats.map((c) => c.name),
+      cats.map((c) => c.name)
     );
-    this.levelProgress.set(levelStats);
+  
+    this.levelProgress.update((prev) => ({
+      ...prev,
+      [level]: levelStats
+    }));
   }
 
   public async goToCategory(level: string, category: string): Promise<void> {
