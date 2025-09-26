@@ -73,3 +73,66 @@ ng generate --help
 🙉 [Nadezhda Memelova](https://github.com/nadezhdanik)
 
 🙊 [Alena Alekseeva](https://github.com/Alena1409)
+
+##  Environment Variables
+
+пример структуры firebaseConfig = {
+  - **apiKey**: API ключ вашего Firebase проекта (пример: `<YOUR_API_KEY>`)
+- **authDomain**: Домен аутентификации (пример: `<YOUR_AUTH_DOMAIN>`)
+- **projectId**: ID проекта Firebase (пример: `<YOUR_PROJECT_ID>`)
+- **storageBucket**: Хранилище файлов Firebase (пример: `<YOUR_STORAGE_BUCKET>`)
+- **messagingSenderId**: ID отправителя для Firebase Cloud Messaging (пример: `<YOUR_MESSAGING_SENDER_ID>`)
+- **appId**: Уникальный идентификатор приложения (пример: `<YOUR_APP_ID>`)
+- **measurementId**: ID для Google Analytics (опционально) (пример: `<YOUR_MEASUREMENT_ID>`)
+
+};
+
+## Architecture diagram 
+```
+App
+├─ app.ts / app.html / app.routes.ts / app.scss
+├─ Core            // сервисы, модели, паттерны и guards
+│  ├─ Firebase
+│  │   ├─ firebase.config.ts
+│  │   └─ firebase.providers.ts
+│  ├─ Guards
+│  │   ├─ auth-guard.ts
+│  │   └─ no-auth-guard.ts
+│  ├─ Models
+│  │   ├─ category.interface.ts
+│  │   ├─ theme.enum.ts
+│  │   ├─ user.interface.ts
+│  │   └─ words.interface.ts
+│  ├─ Patterns
+│  │   ├─ email-pattern.ts
+│  │   └─ password-pattern.ts
+│  └─ Services
+│      ├─ Auth
+│      ├─ Theme
+│      ├─ User
+│      └─ Word
+├─ Features         // основные функциональные модули (страницы и их сервисы)
+│  ├─ About
+│  │   └─ team.data.ts
+│  ├─ Category
+│  │   └─ Features
+│  │       ├─ EditWordsList
+│  │       ├─ LearnWords
+│  │       ├─ MatchPairs
+│  │       ├─ OddOneOut
+│  │       └─ TrueFalse
+│  ├─ Home
+│  │   ├─ Services
+│  │   ├─ Interfaces
+│  │   └─ Mocks
+│  ├─ Login
+│  │   └─ Models
+│  ├─ NotFound
+│  ├─ Profile
+│  ├─ Registration
+│  │   └─ Models
+│  └─ WordsLevel
+└─ Shared
+   ├─ Footer
+   └─ Header
+   ```
