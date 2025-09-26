@@ -1,22 +1,32 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { CategoryService } from './services/categories.service';
 import { UserService } from '../../core/services/user/user';
 import { Auth } from '@angular/fire/auth';
+import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterModule],
+  imports: [RouterModule, MatProgressSpinnerModule, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Home {
+export class Home implements OnInit {
   public categoryService = inject(CategoryService);
   public levels: string[] = ['A1', 'A2', 'B1', 'B2'];
   public selectedLevel = signal<string>('A1');
   public categories = this.categoryService.categories;
+  public isLoading = signal(true);
 
   public categoryProgress = signal<
     Record<string, { totalCount: number; learnedCount: number; percent: number }>
@@ -31,9 +41,7 @@ export class Home {
     const progress = this.categoryProgress();
     return cats.map((cat) => ({
       ...cat,
-      totalCount: progress[cat.name]?.totalCount ?? 0,
-      learnedCount: progress[cat.name]?.learnedCount ?? 0,
-      percent: progress[cat.name]?.percent ?? 0,
+      ...(progress[cat.name] ?? { totalCount: 0, learnedCount: 0, percent: 0 }),
     }));
   });
 
@@ -41,16 +49,21 @@ export class Home {
   private userService = inject(UserService);
   private auth = inject(Auth);
 
-  constructor() {
+  public ngOnInit(): void {
     this.loadCategories(this.selectedLevel());
   }
 
   public async loadCategories(level: string): Promise<void> {
+    this.isLoading.set(true);
     this.selectedLevel.set(level);
     await this.categoryService.getCategories(level);
 
     const uid = this.auth.currentUser?.uid;
-    if (!uid) return;
+
+    if (!uid) {
+      this.isLoading.set(false);
+      return;
+    }
 
     const cats = this.categoryService.categories();
     const progressMap: Record<
@@ -76,6 +89,7 @@ export class Home {
       ...prev,
       [level]: levelStats,
     }));
+    this.isLoading.set(false);
   }
 
   public async goToCategory(level: string, category: string): Promise<void> {
