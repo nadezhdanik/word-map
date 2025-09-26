@@ -22,6 +22,9 @@
     <button class="btn primary" (click)="router.navigate(['../'], { relativeTo: route })">
       Back
     </button>
-    <button class="btn primary" (click)="saveLearnedWords()">Save</button>
+
+    <button class="btn primary" (click)="saveLearnedWords()" [disabled]="!hasChanges()">
+      Save
+    </button>
   </div>
 </div>

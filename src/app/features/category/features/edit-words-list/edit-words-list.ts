@@ -18,6 +18,7 @@ export class EditWordsList implements OnInit {
   public category = signal<string>('');
   public level = signal<string>('');
   public words = signal<Word[]>([]);
+  public hasChanges = signal(false);
 
   public route = inject(ActivatedRoute);
   public router = inject(Router);
@@ -42,41 +43,47 @@ export class EditWordsList implements OnInit {
 
   public toggleLearned(word: Word & { status: WordStatus }): void {
     this.wordsWithStatus.update((words) =>
-      this.sortWords(
-        words.map((w) =>
-          w.wordId === word.wordId
-            ? { ...w, status: w.status === 'learned' ? 'new' : 'learned' }
-            : w,
-        ),
+      words.map((w) =>
+        w.wordId === word.wordId ? { ...w, status: w.status === 'learned' ? 'new' : 'learned' } : w,
       ),
     );
+    this.hasChanges.set(true);
   }
 
   public async saveLearnedWords(): Promise<void> {
+    if (!this.hasChanges()) return;
     const uid = this.auth.currentUser?.uid;
     if (!uid) return;
 
     const batch = writeBatch(this.firestore);
     const words = this.wordsWithStatus();
-    const CountStatsMap = new Map<string, number>();
+    const wordsChangeMap = new Map<string, number>();
 
     for (const word of words) {
-      if (word.status === 'learned') {
-        const wordRef = doc(this.firestore, `progress/${uid}/words/${word.wordId}`);
-        batch.set(wordRef, { status: 'learned', lastReviewed: serverTimestamp() }, { merge: true });
+      const wordRef = doc(this.firestore, `progress/${uid}/words/${word.wordId}`);
+      const progress = await this.userService.getWordProgress(uid, word.wordId);
+      const currentStatus: WordStatus = progress?.status ?? 'new';
+
+      if (currentStatus !== word.status) {
+        batch.set(
+          wordRef,
+          { status: word.status, lastReviewed: serverTimestamp() },
+          { merge: true },
+        );
 
         const key = `${word.level}_${word.category}`;
-        CountStatsMap.set(key, (CountStatsMap.get(key) ?? 0) + 1);
+        const delta = word.status === 'learned' ? 1 : -1;
+        wordsChangeMap.set(key, (wordsChangeMap.get(key) ?? 0) + delta);
       }
     }
 
-    for (const [key, count] of CountStatsMap.entries()) {
+    for (const [key, statusChange] of wordsChangeMap.entries()) {
       const [level, category] = key.split('_');
       const statsRef = doc(this.firestore, `progress/${uid}/stats/${level}_${category}`);
       batch.set(
         statsRef,
         {
-          learnedCount: increment(count),
+          learnedCount: increment(statusChange),
         },
         { merge: true },
       );
@@ -84,6 +91,7 @@ export class EditWordsList implements OnInit {
 
     await batch.commit();
     this.wordsWithStatus.update((ws) => this.sortWords(ws));
+    this.hasChanges.set(false);
   }
 
   private sortWords(words: (Word & { status: WordStatus })[]): (Word & { status: WordStatus })[] {
@@ -107,6 +115,6 @@ export class EditWordsList implements OnInit {
       }),
     );
 
-    this.wordsWithStatus.set(wordsWithStatus);
+    this.wordsWithStatus.set(this.sortWords(wordsWithStatus));
   }
 }
