@@ -6,10 +6,12 @@ import { Auth } from '@angular/fire/auth';
 import { CategoryService } from '../../../home/services/categories.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { Firestore, doc, increment, serverTimestamp, writeBatch } from '@angular/fire/firestore';
+import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-edit-words-list',
-  imports: [MatSlideToggleModule],
+  imports: [MatSlideToggleModule, CommonModule, MatProgressSpinnerModule],
   templateUrl: './edit-words-list.html',
   styleUrl: './edit-words-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,7 +20,9 @@ export class EditWordsList implements OnInit {
   public category = signal<string>('');
   public level = signal<string>('');
   public words = signal<Word[]>([]);
+
   public hasChanges = signal(false);
+  public isLoading = signal(true);
 
   public route = inject(ActivatedRoute);
   public router = inject(Router);
@@ -51,6 +55,7 @@ export class EditWordsList implements OnInit {
   }
 
   public async saveLearnedWords(): Promise<void> {
+    this.isLoading.set(true);
     if (!this.hasChanges()) return;
     const uid = this.auth.currentUser?.uid;
     if (!uid) return;
@@ -92,6 +97,7 @@ export class EditWordsList implements OnInit {
     await batch.commit();
     this.wordsWithStatus.update((ws) => this.sortWords(ws));
     this.hasChanges.set(false);
+    this.isLoading.set(false);
   }
 
   private sortWords(words: (Word & { status: WordStatus })[]): (Word & { status: WordStatus })[] {
@@ -99,6 +105,8 @@ export class EditWordsList implements OnInit {
   }
 
   private async loadWords(level: string, category: string): Promise<void> {
+    this.isLoading.set(true);
+
     const words = await this.categoryService.getWords(level, category);
     const uid = this.auth.currentUser?.uid;
 
@@ -116,5 +124,6 @@ export class EditWordsList implements OnInit {
     );
 
     this.wordsWithStatus.set(this.sortWords(wordsWithStatus));
+    this.isLoading.set(false);
   }
 }
