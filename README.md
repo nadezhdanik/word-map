@@ -119,7 +119,6 @@ App
 │  │       ├─ EditWordsList
 │  │       ├─ LearnWords
 │  │       ├─ MatchPairs
-│  │       ├─ OddOneOut
 │  │       └─ TrueFalse
 │  ├─ Home
 │  │   ├─ Services
