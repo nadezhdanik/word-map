@@ -1,1 +1,14 @@
-<p>learn-words works!</p>
+<div class="container">
+  <h2>LEARN WORDS</h2>
+  <button class="card-container" (click)="toggleTranslation()">
+    <mat-card class="bg-card card">
+      <mat-card-title>
+        {{ currentCard().showTranslation ? currentCard().translation : currentCard().word }}
+      </mat-card-title>
+    </mat-card>
+  </button>
+  <button class="btn icon" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Go back
+  </button>
+</div>
