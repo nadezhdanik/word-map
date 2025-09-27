@@ -1,11 +1,24 @@
 <div class="container">
   <h2>LEARN WORDS</h2>
   <button class="card-container" (click)="toggleTranslation()">
-    <mat-card class="bg-card card">
-      <mat-card-title>
-        {{ currentCard().showTranslation ? currentCard().translation : currentCard().word }}
-      </mat-card-title>
-    </mat-card>
+    <div class="card" [class.flipped]="currentCard().showTranslation">
+      <div class="card-inner">
+        <div class="card-front">
+          <mat-card class="bg-card">
+            <mat-card-title>
+              {{ currentCard().word }}
+            </mat-card-title>
+          </mat-card>
+        </div>
+        <div class="card-back">
+          <mat-card class="bg-card">
+            <mat-card-title>
+              {{ currentCard().translation }}
+            </mat-card-title>
+          </mat-card>
+        </div>
+      </div>
+    </div>
   </button>
   <button class="btn icon" (click)="goBack()">
     <mat-icon>arrow_back</mat-icon>
