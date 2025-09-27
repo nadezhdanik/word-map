@@ -9,6 +9,6 @@ export const authGuard: CanActivateFn = () => {
 
   return authState(auth).pipe(
     take(1),
-    map((user) => (user ? true : router.parseUrl('/home'))),
+    map((user) => (user ? true : router.parseUrl('/login'))),
   );
 };
