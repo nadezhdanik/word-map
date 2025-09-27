@@ -18,3 +18,12 @@ export interface WordData {
   level: string;
   category: string;
 }
+
+export interface Word {
+  wordId: string;
+  category: string;
+  level: string;
+  partOfSpeech: string;
+  translation: string;
+  word: string;
+}

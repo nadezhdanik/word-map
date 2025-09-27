@@ -17,47 +17,52 @@
   </ul>
 
   <h3>Our team</h3>
+
   <div class="about__team">
-    @for (dev of developers; track dev.name; let ind = $index) {
-      <mat-card
-        class="about__card"
-        (click)="toggleFlip(ind)"
-        [class.about__card--flipped]="flippedCard === ind"
-      >
-        <div class="about__card-inner">
-          <div class="card-front">
-            <mat-card-title>{{ dev.name }}</mat-card-title>
-            <div class="img-frame">
-              <img [src]="dev.avatar" alt="{{ dev.name }}" />
+    <ng-container>
+      @for (dev of developers; track dev.name; let ind = $index) {
+        <mat-card
+          class="about__card"
+          (click)="toggleFlip(ind)"
+          [class.about__card--flipped]="flippedCard === ind"
+          animate.enter="fade-in"
+        >
+          <div class="about__card-inner">
+            <div class="card-front">
+              <mat-card-title>{{ dev.name }}</mat-card-title>
+              <div class="img-frame">
+                <img [src]="dev.avatar" alt="{{ dev.name }}" />
+              </div>
+              <mat-card-subtitle>{{ dev.role }}</mat-card-subtitle>
+              <p>⬅ flip the card ➡</p>
             </div>
 
-            <mat-card-subtitle>{{ dev.role }}</mat-card-subtitle>
-
-            <p>⬅ flip the card ➡</p>
+            <div class="card-back">
+              <mat-card-content>
+                <p>{{ dev.about }}</p>
+                <p><b>Stack:</b> {{ dev.stack }}</p>
+                <h4>Contribution:</h4>
+                <ul>
+                  <ng-container>
+                    @for (task of dev.contribution; track task) {
+                      <li>{{ task }}</li>
+                    }
+                  </ng-container>
+                </ul>
+                <a
+                  [href]="dev.gitHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  (click)="$event.stopPropagation()"
+                >
+                  GitHub Profile
+                </a>
+              </mat-card-content>
+            </div>
           </div>
-          <div class="card-back">
-            <mat-card-content>
-              <p>{{ dev.about }}</p>
-              <p><b>Stack:</b> {{ dev.stack }}</p>
-              <h4>Contribution:</h4>
-              <ul>
-                @for (task of dev.contribution; track task) {
-                  <li>{{ task }}</li>
-                }
-              </ul>
-              <a
-                [href]="dev.gitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-                (click)="$event.stopPropagation()"
-              >
-                GitHub Profile
-              </a>
-            </mat-card-content>
-          </div>
-        </div>
-      </mat-card>
-    }
+        </mat-card>
+      }
+    </ng-container>
   </div>
 
   <h4>WordMap. Let’s learn words together!</h4>
