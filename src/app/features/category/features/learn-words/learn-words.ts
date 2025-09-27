@@ -16,6 +16,8 @@ export class LearnWords implements OnInit {
   public level = '';
   public category = '';
   public currentCard = signal<Card>({ word: '', translation: '', showTranslation: false });
+  public isFinished = signal(false);
+  public isVisible = signal(true);
 
   private cards: Card[] = [];
   private currentIndex = signal(0);
@@ -35,10 +37,37 @@ export class LearnWords implements OnInit {
 
   public toggleTranslation(): void {
     const card = this.currentCard();
-    this.currentCard.set({
-      ...card,
-      showTranslation: !card.showTranslation,
-    });
+    if (!card.showTranslation) {
+      this.currentCard.set({ ...card, showTranslation: true });
+    }
+  }
+
+  public knewCard(): void {
+    this.cards.splice(this.currentIndex(), 1);
+    if (this.currentIndex() >= this.cards.length) this.currentIndex.set(0);
+    this.fadeAndNext();
+  }
+
+  public didntKnowCard(): void {
+    this.currentIndex.set(this.currentIndex() + 1);
+    if (this.currentIndex() >= this.cards.length) this.currentIndex.set(0);
+    this.fadeAndNext();
+  }
+
+  public resetCards(): void {
+    this.currentIndex.set(0);
+    this.isFinished.set(false);
+    this.getCardData();
+    this.updateCurrentCard();
+  }
+
+  private fadeAndNext(): void {
+    this.isVisible.set(false);
+    this.updateCurrentCard();
+
+    setTimeout(() => {
+      this.isVisible.set(true);
+    }, 300);
   }
 
   private getCardData(): void {
@@ -63,7 +92,8 @@ export class LearnWords implements OnInit {
     if (this.cards.length > 0 && index < this.cards.length) {
       this.currentCard.set(this.cards[index]);
     } else {
-      this.currentCard.set({ word: 'No more cards!', translation: '', showTranslation: false });
+      this.isFinished.set(true);
+      this.currentCard.set({ word: '', translation: '', showTranslation: false });
     }
   }
 }

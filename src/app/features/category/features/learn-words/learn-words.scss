@@ -10,8 +10,13 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 40px;
   align-items: center;
+  position: relative;
+
+  @media (max-width: 900px) {
+    gap: 15px;
+  }
 }
 
 .card-container {
@@ -20,6 +25,16 @@
   background-color: transparent;
   padding: 0;
   cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+  }
+
+  &.visible {
+    opacity: 1;
+  }
 
   @media (max-width: 600px) {
     width: 80%;
@@ -43,7 +58,7 @@ mat-card.card {
 .btn.icon {
   font-size: 20px;
   gap: 10px;
-  justify-self: flex-end;
+  margin-top: auto;
 }
 
 .card {
@@ -64,7 +79,7 @@ mat-card.card {
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s cubic-bezier(0.4, 2, 0.6, 1);
+  transition: transform 0.3s ease-in-out;
   transform-style: preserve-3d;
 }
 
@@ -87,6 +102,7 @@ mat-card.card {
 
 .card-back {
   transform: rotateY(180deg);
+  cursor: default;
 }
 
 .card-front mat-card,
@@ -103,4 +119,59 @@ mat-card.card {
   font-size: 30px;
   font-weight: bold;
   text-align: center;
+
+  @media (max-width: 500px) {
+    font-size: 22px;
+  }
+}
+
+.buttons {
+  margin: 30px 10px 0 10px;
+  display: flex;
+  gap: 70px;
+  position: absolute;
+  bottom: 80px;
+
+  @media (max-width: 600px) {
+    bottom: 60px;
+  }
+
+  & .btn {
+    font-size: 22px;
+    @media (max-width: 500px) {
+      font-size: 16px;
+    }
+  }
+
+  & > :first-child {
+    color: var(--accent-red);
+    border-color: var((--accent-red));
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--accent-red);
+        color: var(--light-card-bg);
+      }
+    }
+  }
+}
+
+.finished-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  cursor: default;
+}
+
+.finished-message {
+  font-size: 30px;
+  color: var(--text-primary);
+  font-weight: bold;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
 }
