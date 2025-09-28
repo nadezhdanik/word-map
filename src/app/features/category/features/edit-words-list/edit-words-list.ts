@@ -55,8 +55,9 @@ export class EditWordsList implements OnInit {
   }
 
   public async saveLearnedWords(): Promise<void> {
-    this.isLoading.set(true);
     if (!this.hasChanges()) return;
+
+    this.isLoading.set(true);
     const uid = this.auth.currentUser?.uid;
     if (!uid) return;
 

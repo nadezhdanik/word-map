@@ -1,8 +1,8 @@
 .category-page {
-    min-width: 250px;
-    padding: 1rem;
-    
-    h2 {
+  min-width: 250px;
+  padding: 1rem;
+
+  h2 {
     text-align: center;
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
@@ -20,9 +20,20 @@
       padding: 2px 20px;
       border-radius: 20px;
 
-      &:hover {
-        background-color: var(--accent-blue);
-        color: var(--light-card-bg);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--accent-blue);
+          color: var(--light-card-bg);
+        }
+      }
+
+      &:focus-within {
+        outline: 2px solid var(--accent-blue);
+      }
+
+      input {
+        outline: none;
+        cursor: pointer;
       }
 
       span {
