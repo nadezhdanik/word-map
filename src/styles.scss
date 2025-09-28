@@ -222,7 +222,8 @@ body.dark {
     }
   }
 
-  &:disabled {
+  &:disabled,
+  &[aria-disabled] {
     cursor: default;
     background-color: var(--light-border);
     border-color: transparent;
