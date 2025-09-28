@@ -149,7 +149,8 @@ body.dark {
     }
   }
 
-  .true-false__card {
+  .true-false__card,
+  .finished-message {
     color: var(--dark-text);
   }
 }
