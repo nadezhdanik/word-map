@@ -25,7 +25,7 @@ export class Header {
     try {
       event.preventDefault();
       await this.authService.logout();
-      await this.router.navigate(['/home']);
+      await this.router.navigate(['/login']);
     } catch {
       this.snackBar.open(`❌ Logout error.`, 'Close', { duration: 3000 });
     }
