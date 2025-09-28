@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "format": "prettier --write \"src/**/*.{ts,html,scss,css,js,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,scss,css,js,json}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cypress:open": "cypress open"
   },
   "prettier": {
     "printWidth": 100,
@@ -50,8 +51,10 @@
     "@angular/build": "^20.2.2",
     "@angular/cli": "^20.2.2",
     "@angular/compiler-cli": "^20.2.0",
+    "@types/cypress": "^0.1.6",
     "@types/jasmine": "~5.1.0",
     "angular-eslint": "20.2.0",
+    "cypress": "^15.3.0",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
