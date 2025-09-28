@@ -39,14 +39,12 @@ export class Auth {
 
   public async login(email: string, password: string): Promise<UserCredential> {
     const result = await signInWithEmailAndPassword(this.auth, email, password);
-    await this.userService.ensureUserDoc(result.user);
     return result;
   }
 
   public async googleSignIn(): Promise<UserCredential> {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(this.auth, provider);
-    await this.userService.ensureUserDoc(result.user);
     return result;
   }
 

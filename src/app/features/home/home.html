@@ -1,31 +1,47 @@
-<div class="tabs">
-  @if (levels) {
-    @for (level of levels; track level) {
-      <button
-        class="tab"
-        (click)="loadCategories(level)"
-        (keydown.enter)="loadCategories(level)"
-        tabindex="0"
-        [class.active]="level === selectedLevel()"
-      >
-        {{ level }}
-        <p class="progress">12%</p>
-      </button>
-    }
-  }
-</div>
+<ng-template #content>
+  <div class="page-wrapper" [class.loading]="isLoading()">
+    <div class="tabs">
+      @if (levels) {
+        @for (level of levels; track level) {
+          <button
+            class="tab"
+            (click)="loadCategories(level)"
+            (keydown.enter)="loadCategories(level)"
+            tabindex="0"
+            [class.active]="level === selectedLevel()"
+          >
+            {{ level }}
+            <p class="progress">>{{ levelProgress()[level]?.percent ?? 0 }}%</p>
+          </button>
+        }
+      }
+    </div>
 
-<hr />
+    <hr />
 
-<div class="categories">
-  @for (category of categories(); track category.name) {
-    <button
-      class="category-btn"
-      (click)="goToCategory(selectedLevel(), category.name)"
-      (keydown.enter)="goToCategory(selectedLevel(), category.name)"
-    >
-      <p>{{ category.name }}</p>
-      <p>0 / {{ category.count }}</p>
-    </button>
-  }
-</div>
+    <div class="categories">
+      @for (category of categoriesWithProgress(); track category.name) {
+        <button
+          class="category-btn"
+          (click)="goToCategory(selectedLevel(), category.name)"
+          (keydown.enter)="goToCategory(selectedLevel(), category.name)"
+        >
+          <p>{{ category.name }}</p>
+          <p>{{ category.learnedCount }} / {{ category.totalCount }}</p>
+        </button>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #spinner>
+  <div class="spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-container [ngTemplateOutlet]="content"></ng-container>
+
+@if (isLoading()) {
+  <ng-container [ngTemplateOutlet]="spinner"></ng-container>
+}

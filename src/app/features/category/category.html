@@ -1,21 +1,19 @@
 <h2>{{ level() }} - {{ category() }}</h2>
 
-<button class="btn primary" [routerLink]="['/category', level(), category(), 'learn-words']">
-  Learn words
-</button>
-
 <button class="btn primary" [routerLink]="['/category', level(), category(), 'edit-words-list']">
   Edit words list
+</button>
+
+<button class="btn primary" [routerLink]="['/category', level(), category(), 'learn-words']">
+  Learn words
 </button>
 
 <button class="btn primary" [routerLink]="['/category', level(), category(), 'pairs']">
   Match pairs
 </button>
 
-<button class="btn primary" [routerLink]="['/category', level(), category(), 'odd-one-out']">
-  Odd one out
-</button>
-
 <button class="btn primary" [routerLink]="['/category', level(), category(), 'true-false']">
   True or False
 </button>
+
+<button class="btn primary" [routerLink]="['/home']">Back</button>

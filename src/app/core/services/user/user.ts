@@ -9,13 +9,15 @@ import {
 } from '@angular/fire/firestore';
 import { UserDoc } from '../../models/user.interface';
 import { User } from '@angular/fire/auth';
-import { WordData } from '../../models/words.interface';
+import { WordData, WordProgress, WordStatus } from '../../models/words.interface';
+import { WordService } from '../word/word.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private firestore = inject(Firestore);
+  private wordService = inject(WordService);
 
   public async createUserDoc(uid: string, email: string, name: string): Promise<void> {
     const userRef = doc(this.firestore, `users/${uid}`);
@@ -77,6 +79,17 @@ export class UserService {
     );
   }
 
+  public async getWordProgress(uid: string, wordId: string): Promise<WordProgress | null> {
+    const wordRef = doc(this.firestore, `progress/${uid}/words/${wordId}`);
+    const snapshot = await getDoc(wordRef);
+    return snapshot.exists() ? (snapshot.data() as WordProgress) : null;
+  }
+
+  public async updateWordStatus(uid: string, wordId: string, status: WordStatus): Promise<void> {
+    const wordRef = doc(this.firestore, `progress/${uid}/words/${wordId}`);
+    await setDoc(wordRef, { status }, { merge: true });
+  }
+
   public async updateUserProgress(uid: string, words: WordData[]): Promise<void> {
     const batch = writeBatch(this.firestore);
     const statsMap = new Map<string, { level: string; category: string; totalCount: number }>();
@@ -124,7 +137,14 @@ export class UserService {
   }
 
   public async ensureUserDoc(user: User): Promise<void> {
-    await this.createUserDoc(user.uid, user.email ?? '', user.displayName ?? '');
+    const userRef = doc(this.firestore, `users/${user.uid}`);
+    const snapshot = await getDoc(userRef);
+
+    if (!snapshot.exists()) {
+      await this.createUserDoc(user.uid, user.email ?? '', user.displayName ?? '');
+      const allWords = await this.wordService.getAllWords();
+      await this.initializeUserProgress(user.uid, allWords);
+    }
   }
 
   public async getCategoryProgress(
@@ -147,5 +167,30 @@ export class UserService {
           : 0,
       };
     }
+  }
+
+  public async getLevelProgress(
+    uid: string,
+    level: string,
+    categories: string[],
+  ): Promise<{ totalCount: number; learnedCount: number; percent: number }> {
+    let totalCount = 0;
+    let learnedCount = 0;
+
+    for (const category of categories) {
+      const stats = await this.getCategoryProgress(uid, level, category);
+      totalCount += stats.totalCount;
+      learnedCount += stats.learnedCount;
+    }
+
+    return {
+      totalCount,
+      learnedCount,
+      percent: totalCount ? Math.round((learnedCount / totalCount) * 100) : 0,
+    };
+  }
+
+  public async initializeUserProgress(uid: string, allWords: WordData[]): Promise<void> {
+    await this.updateUserProgress(uid, allWords);
   }
 }
