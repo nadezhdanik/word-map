@@ -11,7 +11,8 @@
     "format": "prettier --write \"src/**/*.{ts,html,scss,css,js,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,scss,css,js,json}\"",
     "prepare": "husky",
-    "cypress:open": "cypress open"
+    "e2e": "cypress run",
+    "e2e:open": "cypress open"
   },
   "prettier": {
     "printWidth": 100,

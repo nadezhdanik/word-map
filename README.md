@@ -11,14 +11,16 @@ No ads. No clutter. Just ⚡ speed and focus.
 
 ## 🛠️ Tech Stack
 
-| Area                     | Tools                                                |
+| Area                     | Tools & Frameworks                                   |
 | ------------------------ | ---------------------------------------------------- |
 | **Frontend**             | Angular v20.2.2, TypeScript, HTML, SCSS, Vite, Karma |
-| **Backend**              | Firebase (auth, storage, sync)                       |
-| **DevOps**               | ESLint                                               |
+| **Backend**              | Firebase (Auth, Storage, Firestore)                  |
+| **Testing**              | Jasmine (unit), Karma (unit runner), Cypress (E2E)   |
+| **DevOps / CI**          | GitHub Actions, ESLint, Husky, Prettier, Lint-Staged |
 | **Management**           | GitHub Projects, Discord                             |
-| **Features Implemented** | Signals, Lazy loading, Guards, Reactive Forms        |
-| **Accessibility**        | Semantic HTML, ARIA labels, keyboard navigation      |
+| **Features Implemented** | Signals, Lazy Loading, Guards, Reactive Forms        |
+| **Accessibility**        | Semantic HTML, ARIA labels, Keyboard Navigation      |
+| **Deployment**           | Netlify (frontend), Firebase (backend)               |
 
 ## 🚀 Getting Started
 
@@ -44,13 +46,17 @@ The following NPM scripts are available for development, formatting, linting, an
 npm run <script-name>
 ```
 
-| Script  | Description                                               |
-| ------- | --------------------------------------------------------- |
-| `start` | Run dev server at [localhost:4200](http://localhost:4200) |
-| `build` | Build project for production (`dist/`)                    |
-| `watch` | Dev build with file watching                              |
-| `lint`  | Run ESLint checks                                         |
-| `test`  | Run unit tests                                            |
+| Script         | Description                                               |
+| -------------- | --------------------------------------------------------- |
+| `start`        | Run dev server at [localhost:4200](http://localhost:4200) |
+| `build`        | Build project for production (`dist/`)                    |
+| `watch`        | Dev build with file watching                              |
+| `lint`         | Run ESLint checks                                         |
+| `test`         | Run unit tests headlessly (ChromeHeadless)                |
+| `format`       | Format project files with Prettier                        |
+| `format:check` | Check formatting without changing files                   |
+| `e2e`          | Run Cypress E2E tests headlessly                          |
+| `e2e:open`     | Open Cypress GUI for interactive E2E testing              |
 
 ## ⚡ Angular Tips
 
@@ -74,10 +80,11 @@ ng generate --help
 
 🙊 [Alena Alekseeva](https://github.com/Alena1409)
 
-##  Environment Variables
+## Environment Variables
 
 пример структуры firebaseConfig = {
-  - **apiKey**: API ключ вашего Firebase проекта (пример: `<YOUR_API_KEY>`)
+
+- **apiKey**: API ключ вашего Firebase проекта (пример: `<YOUR_API_KEY>`)
 - **authDomain**: Домен аутентификации (пример: `<YOUR_AUTH_DOMAIN>`)
 - **projectId**: ID проекта Firebase (пример: `<YOUR_PROJECT_ID>`)
 - **storageBucket**: Хранилище файлов Firebase (пример: `<YOUR_STORAGE_BUCKET>`)
@@ -87,7 +94,8 @@ ng generate --help
 
 };
 
-## Architecture diagram 
+## Architecture diagram
+
 ```
 App
 ├─ app.ts / app.html / app.routes.ts / app.scss
@@ -134,4 +142,4 @@ App
 └─ Shared
    ├─ Footer
    └─ Header
-   ```
+```
