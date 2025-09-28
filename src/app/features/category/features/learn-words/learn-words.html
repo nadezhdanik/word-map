@@ -1,1 +1,41 @@
-<p>learn-words works!</p>
+<div class="container">
+  <h2>LEARN WORDS</h2>
+  <button class="card-container" (click)="toggleTranslation()">
+    @if (isFinished()) {
+      <div class="finished-container">
+        <p class="finished-message">Well done!</p>
+        <button class="btn primary" (click)="resetCards()">Reset cards</button>
+      </div>
+    } @else {
+      <div class="card" [class.flipped]="currentCard().showTranslation">
+        <div class="card-inner">
+          <div class="card-front">
+            <mat-card class="bg-card">
+              <mat-card-title [class.visible]="isVisible()" [class.hidden]="!isVisible()">
+                {{ currentCard().word }}
+              </mat-card-title>
+            </mat-card>
+          </div>
+          <div class="card-back">
+            <mat-card class="bg-card">
+              <mat-card-title [class.visible]="isVisible()" [class.hidden]="!isVisible()">
+                {{ currentCard().translation }}
+              </mat-card-title>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    }
+  </button>
+
+  <div class="buttons" [class.hidden]="isFinished()">
+    @if (currentCard().showTranslation) {
+      <button class="btn secondary" (click)="didntKnowCard()">I didn't know</button>
+      <button class="btn secondary" (click)="knewCard()">I knew</button>
+    }
+  </div>
+  <button class="btn icon" (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+    Go back
+  </button>
+</div>
