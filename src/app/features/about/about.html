@@ -26,18 +26,23 @@
           (click)="toggleFlip(ind)"
           [class.about__card--flipped]="flippedCard === ind"
           animate.enter="fade-in"
+          role="button"
+          tabindex="0"
+          [aria-expanded]="flippedCard === ind"
+          (keydown.enter)="toggleFlip(ind)"
+          (keydown.space)="toggleFlip(ind)"
         >
           <div class="about__card-inner">
-            <div class="card-front">
+            <div class="card-front" [aria-hidden]="flippedCard === ind">
               <mat-card-title>{{ dev.name }}</mat-card-title>
               <div class="img-frame">
                 <img [src]="dev.avatar" alt="{{ dev.name }}" />
               </div>
               <mat-card-subtitle>{{ dev.role }}</mat-card-subtitle>
-              <p>⬅ flip the card ➡</p>
+              <p aria-hidden="true">⬅ flip the card ➡</p>
             </div>
 
-            <div class="card-back">
+            <div class="card-back" [aria-hidden]="flippedCard !== ind">
               <mat-card-content>
                 <p>{{ dev.about }}</p>
                 <p><b>Stack:</b> {{ dev.stack }}</p>
@@ -54,6 +59,8 @@
                   target="_blank"
                   rel="noopener noreferrer"
                   (click)="$event.stopPropagation()"
+                  [tabindex]="flippedCard === ind ? 0 : -1"
+                  aria-label="GitHub profile of {{ dev.name }} (opens in a new tab)"
                 >
                   GitHub Profile
                 </a>

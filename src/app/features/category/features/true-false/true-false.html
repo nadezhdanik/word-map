@@ -1,11 +1,14 @@
 <div class="true-false">
   <h2>TRUE OR FALSE?</h2>
   <div class="true-false__cards">
-    <mat-card class="true-false__card bg-card">
+    <mat-card class="true-false__card bg-card" [aria-label]="'Word: ' + firstCard.word">
       <mat-card-title class="title">{{ firstCard.word }}</mat-card-title>
     </mat-card>
-    <mat-icon>arrow_forward</mat-icon>
-    <mat-card class="true-false__card bg-card">
+    <mat-icon aria-hidden="true">arrow_forward</mat-icon>
+    <mat-card
+      class="true-false__card bg-card"
+      [aria-label]="'Translation: ' + displayedTranslation()"
+    >
       <mat-card-title class="title">{{ displayedTranslation() }}</mat-card-title>
     </mat-card>
   </div>
@@ -15,8 +18,10 @@
       False
     </button>
   </div>
-  <p class="true-false__result" [hidden]="!choiceMade()">
+  <p class="true-false__result" [hidden]="!choiceMade()" aria-live="polite">
     {{ result() }}
   </p>
-  <button class="btn icon" (click)="goBack()"><mat-icon>arrow_back</mat-icon> Go back</button>
+  <button class="btn icon" (click)="goBack()" aria-label="Go back">
+    <mat-icon aria-hidden="true">arrow_back</mat-icon> Go back
+  </button>
 </div>

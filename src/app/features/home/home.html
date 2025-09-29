@@ -1,13 +1,11 @@
 <ng-template #content>
   <div class="page-wrapper" [class.loading]="isLoading()">
-    <div class="tabs">
+    <div class="tabs" role="tablist" aria-label="Select level">
       @if (levels) {
         @for (level of levels; track level) {
           <button
             class="tab"
             (click)="loadCategories(level)"
-            (keydown.enter)="loadCategories(level)"
-            tabindex="0"
             [class.active]="level === selectedLevel()"
           >
             {{ level }}
@@ -24,7 +22,15 @@
         <button
           class="category-btn"
           (click)="goToCategory(selectedLevel(), category.name)"
-          (keydown.enter)="goToCategory(selectedLevel(), category.name)"
+          [attr.aria-label]="
+            'Category ' +
+            category.name +
+            ', ' +
+            category.learnedCount +
+            ' of ' +
+            category.totalCount +
+            ' learned'
+          "
         >
           <p>{{ category.name }}</p>
           <p>{{ category.learnedCount }} / {{ category.totalCount }}</p>
@@ -35,7 +41,7 @@
 </ng-template>
 
 <ng-template #spinner>
-  <div class="spinner">
+  <div class="spinner" role="status" aria-live="polite" aria-label="Loading">
     <mat-spinner diameter="40"></mat-spinner>
   </div>
 </ng-template>

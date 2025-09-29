@@ -11,7 +11,11 @@
             <label class="toggle">
               <input
                 type="checkbox"
+                [aria-checked]="word.status === 'learned' ? 'true' : 'false'"
                 [checked]="word.status === 'learned'"
+                [attr.aria-label]="
+                  word.word + (word.status === 'learned' ? ', learned' : ', not learned')
+                "
                 (change)="toggleLearned(word)"
               />
             </label>
@@ -24,7 +28,11 @@
         Back
       </button>
 
-      <button class="btn primary" (click)="saveLearnedWords()" [disabled]="!hasChanges()">
+      <button
+        class="btn primary"
+        (click)="saveLearnedWords()"
+        [aria-disabled]="!hasChanges() ? true : null"
+      >
         Save
       </button>
     </div>

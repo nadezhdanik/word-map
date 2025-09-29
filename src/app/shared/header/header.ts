@@ -21,10 +21,11 @@ export class Header {
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
 
-  public async logout(): Promise<void> {
+  public async logout(event: Event): Promise<void> {
     try {
+      event.preventDefault();
       await this.authService.logout();
-      await this.router.navigate(['/home']);
+      await this.router.navigate(['/login']);
     } catch {
       this.snackBar.open(`❌ Logout error.`, 'Close', { duration: 3000 });
     }

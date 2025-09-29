@@ -23,9 +23,14 @@
         ><mat-icon>person</mat-icon>
       </a>
 
-      <mat-icon class="header__icon" aria-label="Logout " matTooltip="Logout" (click)="logout()"
-        >logout</mat-icon
+      <button
+        class="header__icon"
+        aria-label="Log out"
+        matTooltip="Log out"
+        (click)="logout($event)"
       >
+        <mat-icon>logout</mat-icon>
+      </button>
     } @else {
       <a
         class="header__icon"
@@ -41,27 +46,17 @@
         routerLink="login"
         routerLinkActive="active"
         aria-label="Go to Login page"
-        matTooltip="Login"
+        matTooltip="Log in"
         ><mat-icon>login</mat-icon>
       </a>
     }
 
-    @if (themeService.theme() === 'light') {
-      <mat-icon
-        class="header__theme"
-        matTooltip="theme"
-        aria-label="Change on dark theme"
-        (click)="themeService.toggleTheme()"
-        >sunny</mat-icon
-      >
-    } @else {
-      <mat-icon
-        class="header__theme"
-        aria-label="Change on light theme"
-        matTooltip="theme"
-        (click)="themeService.toggleTheme()"
-        >nightlight</mat-icon
-      >
-    }
+    <button (click)="themeService.toggleTheme()" matTooltip="Switch theme">
+      @if (themeService.theme() === 'light') {
+        <mat-icon class="header__theme" aria-label="Switch to dark theme">sunny</mat-icon>
+      } @else {
+        <mat-icon class="header__theme" aria-label="Switch to light theme">nightlight</mat-icon>
+      }
+    </button>
   </div>
 </header>
