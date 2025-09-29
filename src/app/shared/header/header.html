@@ -1,0 +1,62 @@
+<header class="header">
+  <div class="header__logo">
+    <a routerLink="home" aria-label="Go to Home page" matTooltip="Home"><span>WM</span> </a>
+  </div>
+
+  <div class="header__icons">
+    <a
+      class="header__icon"
+      routerLink="about"
+      routerLinkActive="active"
+      aria-label="Go to About page"
+      matTooltip="About"
+      ><mat-icon>info</mat-icon>
+    </a>
+
+    @if (authService.isUserLoggedIn()) {
+      <a
+        class="header__icon"
+        routerLink="profile"
+        routerLinkActive="active"
+        aria-label="Go to Profile page"
+        matTooltip="Profile"
+        ><mat-icon>person</mat-icon>
+      </a>
+
+      <button
+        class="header__icon"
+        aria-label="Log out"
+        matTooltip="Log out"
+        (click)="logout($event)"
+      >
+        <mat-icon>logout</mat-icon>
+      </button>
+    } @else {
+      <a
+        class="header__icon"
+        routerLink="registration"
+        routerLinkActive="active"
+        aria-label="Go to Registration page"
+        matTooltip="Registration"
+        ><mat-icon>person_add</mat-icon>
+      </a>
+
+      <a
+        class="header__icon"
+        routerLink="login"
+        routerLinkActive="active"
+        aria-label="Go to Login page"
+        matTooltip="Log in"
+        ><mat-icon>login</mat-icon>
+      </a>
+    }
+
+    <button (click)="themeService.toggleTheme()" matTooltip="Switch theme">
+      @if (themeService.theme() === 'light') {
+        <mat-icon class="header__theme" aria-label="Switch to dark theme">sunny</mat-icon>
+      } @else {
+        <mat-icon class="header__theme" aria-label="Switch to light theme">nightlight</mat-icon>
+      }
+    </button>
+  </div>
+</header>

@@ -1,0 +1,17 @@
+:host {
+  align-self: flex-start;
+  margin-top: 3rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+.btn {
+  width: 200px;
+  margin: 10px auto;
+
+  &:last-of-type {
+    margin-top: 60px;
+  }
+}

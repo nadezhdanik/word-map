@@ -1,0 +1,88 @@
+:host {
+  align-self: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.true-false {
+  height: 90%;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.true-false__cards {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.true-false__card {
+  text-align: center;
+  width: 100%;
+  max-width: 25%;
+  min-width: 100px;
+  min-height: 100px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 500px) {
+    max-width: 100%;
+    min-height: 60px;
+  }
+}
+
+.true-false__buttons {
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+
+  & .btn {
+    font-size: 22px;
+    @media (max-width: 500px) {
+      font-size: 16px;
+    }
+  }
+
+  & > :nth-child(2) {
+    color: var(--accent-red);
+    border-color: var((--accent-red));
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--accent-red);
+        color: var(--light-card-bg);
+      }
+    }
+  }
+}
+
+.true-false__result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  min-height: 1.6rem;
+}
+
+.title.mat-mdc-card-title {
+  font-size: 30px;
+  @media (max-width: 500px) {
+    font-size: 22px;
+  }
+}
+
+.btn.icon {
+  font-size: 20px;
+  gap: 10px;
+  justify-self: flex-end;
+}

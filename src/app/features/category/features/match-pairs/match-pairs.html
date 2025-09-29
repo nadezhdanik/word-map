@@ -1,0 +1,66 @@
+<div class="game">
+  <div class="game__header">
+    <h2 class="game__title">MATCH PAIRS</h2>
+    <div class="game__mode-control">
+      <div class="game__mode-buttons">
+        <button class="btn icon" aria-label="Go to back" matTooltip="Back" (click)="toBack()">
+          <mat-icon aria-hidden="true">arrow_back</mat-icon>
+        </button>
+        <button
+          class="btn icon"
+          aria-label="New Game"
+          matTooltip="New Game"
+          (click)="restartGame()"
+        >
+          <mat-icon aria-hidden="true">sports_esports</mat-icon>NEW GAME
+        </button>
+        <button
+          class="btn icon"
+          aria-label="Mix the cards"
+          matTooltip="Mix Cards"
+          (click)="shuffleCards()"
+        >
+          <mat-icon aria-hidden="true">sync</mat-icon>
+        </button>
+      </div>
+
+      <mat-button-toggle-group
+        [(ngModel)]="countMode"
+        (change)="restartGame()"
+        name="cardsCountToggle"
+        aria-label="Select number of cards"
+      >
+        <mat-button-toggle value="all">ALL</mat-button-toggle>
+        <mat-button-toggle value="half">HALF</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <mat-button-toggle-group
+        [(ngModel)]="easyMode"
+        name="modeToggle"
+        aria-label="Select game difficulty"
+      >
+        <mat-button-toggle [value]="true">EASY</mat-button-toggle>
+        <mat-button-toggle [value]="false">HARD</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <div class="game__cards">
+    @for (card of cards; track card) {
+      <button
+        class="card bg-card"
+        (click)="onCardClick(card)"
+        [class.selected]="card.opened"
+        [class.error]="card.error"
+        [class.win]="gameWon"
+        [attr.aria-pressed]="card.opened"
+        [attr.aria-label]="'Card ' + (card.opened ? card.content + ', revealed' : 'hidden')"
+      >
+        <div class="card-content">
+          <span class="card-text" [class.hidden]="!card.opened && !easyMode">
+            {{ card.content }}
+          </span>
+        </div>
+      </button>
+    }
+  </div>
+</div>

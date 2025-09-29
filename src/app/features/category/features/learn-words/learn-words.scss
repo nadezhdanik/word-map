@@ -1,0 +1,177 @@
+:host {
+  align-self: flex-start;
+  margin-top: 20px;
+  width: 100%;
+  height: 90%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  position: relative;
+
+  @media (max-width: 900px) {
+    gap: 15px;
+  }
+}
+
+.card-container {
+  width: 40%;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+  }
+
+  &.visible {
+    opacity: 1;
+  }
+
+  @media (max-width: 600px) {
+    width: 80%;
+  }
+}
+
+mat-card.card {
+  padding: 20px;
+  min-width: 250px;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  mat-card-title {
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+
+.btn.icon {
+  font-size: 20px;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.card {
+  perspective: 1000px;
+  width: 100%;
+  min-width: 250px;
+  height: 220px;
+  margin: auto;
+  border: none;
+  background: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  cursor: default;
+}
+
+.card-front mat-card,
+.card-back mat-card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-front mat-card-title,
+.card-back mat-card-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+
+  @media (max-width: 500px) {
+    font-size: 22px;
+  }
+}
+
+.buttons {
+  margin: 30px 10px 0 10px;
+  display: flex;
+  gap: 70px;
+  position: absolute;
+  bottom: 80px;
+
+  @media (max-width: 600px) {
+    bottom: 60px;
+  }
+
+  & .btn {
+    font-size: 22px;
+    @media (max-width: 500px) {
+      font-size: 16px;
+    }
+  }
+
+  & > :first-child {
+    color: var(--accent-red);
+    border-color: var((--accent-red));
+
+    @media (hover: hover) {
+      &:hover {
+        background-color: var(--accent-red);
+        color: var(--light-card-bg);
+      }
+    }
+  }
+}
+
+.finished-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  cursor: default;
+}
+
+.finished-message {
+  font-size: 30px;
+  color: var(--text-primary);
+  font-weight: bold;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}

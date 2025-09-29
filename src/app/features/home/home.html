@@ -1,0 +1,53 @@
+<ng-template #content>
+  <div class="page-wrapper" [class.loading]="isLoading()">
+    <div class="tabs" role="tablist" aria-label="Select level">
+      @if (levels) {
+        @for (level of levels; track level) {
+          <button
+            class="tab"
+            (click)="loadCategories(level)"
+            [class.active]="level === selectedLevel()"
+          >
+            {{ level }}
+            <p class="progress">>{{ levelProgress()[level]?.percent ?? 0 }}%</p>
+          </button>
+        }
+      }
+    </div>
+
+    <hr />
+
+    <div class="categories">
+      @for (category of categoriesWithProgress(); track category.name) {
+        <button
+          class="category-btn"
+          (click)="goToCategory(selectedLevel(), category.name)"
+          [attr.aria-label]="
+            'Category ' +
+            category.name +
+            ', ' +
+            category.learnedCount +
+            ' of ' +
+            category.totalCount +
+            ' learned'
+          "
+        >
+          <p>{{ category.name }}</p>
+          <p>{{ category.learnedCount }} / {{ category.totalCount }}</p>
+        </button>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #spinner>
+  <div class="spinner" role="status" aria-live="polite" aria-label="Loading">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-container [ngTemplateOutlet]="content"></ng-container>
+
+@if (isLoading()) {
+  <ng-container [ngTemplateOutlet]="spinner"></ng-container>
+}

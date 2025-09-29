@@ -1,0 +1,52 @@
+<ng-template #content>
+  <div class="page-wrapper category-page" [class.loading]="isLoading()">
+    <h2>{{ category() }} - {{ level() }}</h2>
+
+    <ul>
+      <ng-container>
+        @for (word of wordsWithStatus(); track word.wordId) {
+          <li [style.opacity]="word.status === 'learned' ? 0.5 : 1">
+            <span>{{ word.word }}</span>
+
+            <label class="toggle">
+              <input
+                type="checkbox"
+                [aria-checked]="word.status === 'learned' ? 'true' : 'false'"
+                [checked]="word.status === 'learned'"
+                [attr.aria-label]="
+                  word.word + (word.status === 'learned' ? ', learned' : ', not learned')
+                "
+                (change)="toggleLearned(word)"
+              />
+            </label>
+          </li>
+        }
+      </ng-container>
+    </ul>
+    <div class="buttons">
+      <button class="btn primary" (click)="router.navigate(['../'], { relativeTo: route })">
+        Back
+      </button>
+
+      <button
+        class="btn primary"
+        (click)="saveLearnedWords()"
+        [aria-disabled]="!hasChanges() ? true : null"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #spinner>
+  <div class="spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</ng-template>
+
+<ng-container [ngTemplateOutlet]="content"></ng-container>
+
+@if (isLoading()) {
+  <ng-container [ngTemplateOutlet]="spinner"></ng-container>
+}
